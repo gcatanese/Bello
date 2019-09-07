@@ -81,8 +81,8 @@ public class Forwarder {
         if (headers.get("Accept") != null) {
             connection.setRequestProperty("Accept", headers.get("Accept"));
         }
-        if (headers.get("Host") != null) {
-            connection.setRequestProperty("Host", headers.get("Host"));
+        if (headers.get("ResourcePool") != null) {
+            connection.setRequestProperty("ResourcePool", headers.get("ResourcePool"));
         }
         if (headers.get("Accept-Encoding") != null) {
             connection.setRequestProperty("Accept-Encoding", headers.get("Accept-Encoding"));

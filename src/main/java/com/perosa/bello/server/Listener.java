@@ -50,7 +50,6 @@ public class Listener {
     }
 
     private void doHandleRequest(HttpServerExchange exchange) {
-
         dispatch(exchange);
 
     }
