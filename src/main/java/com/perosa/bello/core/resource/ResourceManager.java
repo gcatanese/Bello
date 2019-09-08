@@ -16,13 +16,12 @@ public class ResourceManager {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ResourceManager.class);
 
-    private static List<ResourcePool> resourcePools = null;
+    private static List<ResourcePool> resourcePools = new ArrayList<>();
 
     public List<ResourcePool> load() {
-        List<ResourcePool> resourcePools = new ArrayList<>();
 
         try {
-            resourcePools = unmarshal(getJson(getFilePath()));
+            this.resourcePools = unmarshal(getJson(getFilePath()));
 
             LOGGER.info("Available services: " + resourcePools);
 
@@ -63,6 +62,10 @@ public class ResourceManager {
     }
 
     private String getFilePath() {
-        return "config/";
+        return "config/hosts.json";
+    }
+
+    public List<ResourcePool> getResourcePools() {
+        return resourcePools;
     }
 }

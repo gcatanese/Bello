@@ -3,7 +3,7 @@ package com.perosa.bello.core.resource;
 public class ResourceHost {
 
     private String host;
-    private int status;
+    private int available;
 
     public String getHost() {
         return host;
@@ -13,19 +13,19 @@ public class ResourceHost {
         this.host = host;
     }
 
-    public int getStatus() {
-        return status;
+    public int getAvailable() {
+        return available;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void setAvailable(int available) {
+        this.available = available;
     }
 
     @Override
     public String toString() {
         return "ResourceHost{" +
                 "host='" + host + '\'' +
-                ", status=" + status +
+                ", available=" + available +
                 '}';
     }
 }

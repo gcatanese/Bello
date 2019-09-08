@@ -4,15 +4,15 @@
     "hosts": [
       {
         "host": "host1.perosa.com",
-        "status": "1"
+        "available": "1"
       },
       {
         "host": "host2.perosa.com",
-        "status": "1"
+        "available": "1"
       },
       {
         "host": "host3.perosa.com",
-        "status": "0"
+        "available": "0"
       }
     ]
   }
