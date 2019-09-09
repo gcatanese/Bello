@@ -14,14 +14,12 @@ public class RandomBalancer extends CoreBalancer implements Balancer {
     private static final Logger LOGGER = LoggerFactory.getLogger(RandomBalancer.class);
 
     ResourceHost findNext(List<ResourceHost> hosts) {
-        ResourceHost resourceHost = null;
 
-        ResourceHost next = hosts.stream()
+        return hosts.stream()
                 .skip((int) (hosts.size() * Math.random()))
                 .findAny()
                 .get();
 
-        return resourceHost;
     }
 
 }
