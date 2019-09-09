@@ -1,8 +1,9 @@
-package com.perosa.bello.core.resource;
+package com.perosa.bello.core.resource.data;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.perosa.bello.core.resource.ResourcePool;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,9 +13,9 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ResourceManager {
+public class ResourceDatastore {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ResourceManager.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ResourceDatastore.class);
 
     private static List<ResourcePool> resourcePools = new ArrayList<>();
 
