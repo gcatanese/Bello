@@ -1,5 +1,6 @@
-package com.perosa.bello.core.resource;
+package com.perosa.bello.core.resource.data;
 
+import com.perosa.bello.core.resource.ResourcePool;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,9 +10,9 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ResourceManagerTest {
+class ResourceDatastoreTest {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ResourceManagerTest.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ResourceDatastoreTest.class);
 
 
     @Test
@@ -37,7 +38,7 @@ class ResourceManagerTest {
                 "  }\n" +
                 "]";
 
-        List<ResourcePool> list = new ResourceManager().unmarshal(json);
+        List<ResourcePool> list = new ResourceDatastore().unmarshal(json);
 
         assertNotNull(list);
         assertEquals(1, list.size());
@@ -47,7 +48,7 @@ class ResourceManagerTest {
     @Test
     void getJson() throws IOException {
 
-        String json = new ResourceManager().getJson("src/test/resources/hosts.json");
+        String json = new ResourceDatastore().getJson("src/test/resources/hosts.json");
 
         LOGGER.info(json);
 
