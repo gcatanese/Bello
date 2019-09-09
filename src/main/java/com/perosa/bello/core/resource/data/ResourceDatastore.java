@@ -23,7 +23,7 @@ public class ResourceManager {
         try {
             this.resourcePools = unmarshal(getJson(getFilePath()));
 
-            LOGGER.info("Available services: " + resourcePools);
+            LOGGER.info("Available resourcePools: " + resourcePools);
 
         } catch (IOException e) {
             LOGGER.error(e.getMessage(), e);
@@ -65,7 +65,4 @@ public class ResourceManager {
         return "config/hosts.json";
     }
 
-    public List<ResourcePool> getResourcePools() {
-        return resourcePools;
-    }
 }
