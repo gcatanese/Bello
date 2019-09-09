@@ -13,6 +13,7 @@ public class RoundRobinBalancer extends CoreBalancer implements Balancer {
     private static int last = 0;
 
     public RoundRobinBalancer() {
+        LOGGER.debug("Last used #" + last);
     }
 
     ResourceHost findNext(List<ResourceHost> hosts) {

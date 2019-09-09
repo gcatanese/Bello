@@ -1,7 +1,6 @@
 package com.perosa.bello.core;
 
 import com.perosa.bello.core.resource.ResourceHost;
-import com.perosa.bello.core.resource.ResourcePool;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

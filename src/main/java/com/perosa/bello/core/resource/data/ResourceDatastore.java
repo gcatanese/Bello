@@ -3,6 +3,7 @@ package com.perosa.bello.core.resource.data;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.perosa.bello.core.resource.ResourceHost;
 import com.perosa.bello.core.resource.ResourcePool;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,34 +18,33 @@ public class ResourceDatastore {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ResourceDatastore.class);
 
-    private static List<ResourcePool> resourcePools = new ArrayList<>();
+    public List<ResourceHost> load() {
 
-    public List<ResourcePool> load() {
+        List<ResourceHost> resourceHosts = new ArrayList<>();
 
         try {
-            this.resourcePools = unmarshal(getJson(getFilePath()));
-
-            LOGGER.info("Available resourcePools: " + resourcePools);
+            resourceHosts = unmarshal(getJson(getFilePath()));
 
         } catch (IOException e) {
             LOGGER.error(e.getMessage(), e);
         }
 
-        return resourcePools;
+        return resourceHosts;
 
     }
 
-    List<ResourcePool> unmarshal(String json) throws IOException {
-        List<ResourcePool> resourcePools = null;
+    List<ResourceHost> unmarshal(String json) throws IOException {
+        List<ResourceHost> resourceHosts = null;
 
         ObjectMapper objectMapper = new ObjectMapper();
 
-        resourcePools = objectMapper
+        resourceHosts = objectMapper
                 .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
                 .findAndRegisterModules()
-                .readValue(json, new TypeReference<List<ResourcePool>>() { });
+                .readValue(json, new TypeReference<List<ResourceHost>>() {
+                });
 
-        return resourcePools;
+        return resourceHosts;
     }
 
     String getJson(String filepath) throws IOException {

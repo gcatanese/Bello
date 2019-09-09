@@ -30,4 +30,12 @@ public class ResourcePool {
     public void setResourceHostList(List<ResourceHost> resourceHostList) {
         this.resourceHostList = resourceHostList;
     }
+
+    @Override
+    public String toString() {
+        return "ResourcePool{" +
+                "path='" + path + '\'' +
+                ", resourceHostList=" + resourceHostList +
+                '}';
+    }
 }

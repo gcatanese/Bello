@@ -1,5 +1,6 @@
 package com.perosa.bello.server;
 
+import com.perosa.bello.core.Balancer;
 import io.undertow.Undertow;
 import io.undertow.server.HttpHandler;
 import io.undertow.server.HttpServerExchange;
@@ -32,7 +33,14 @@ public class Listener {
                             public void handleRequest(HttpServerExchange exchange) throws Exception {
 
                                 LOGGER.info("exchange " + exchange);
-                                doHandleRequest(exchange);
+
+                                try {
+                                    doHandleRequest(exchange);
+
+                                } catch (Exception e) {
+                                    LOGGER.error(e.getMessage(), e);
+                                    exchange.setStatusCode(404);
+                                }
 
                             }
                         })
@@ -55,8 +63,17 @@ public class Listener {
     }
 
     private void dispatch(HttpServerExchange exchange) {
-        String url = exchange.getRequestURL() +
-                (exchange.getQueryString() == null ? "" : "?" + exchange.getQueryString());
+        String host = exchange.getHostName();
+
+        String target = Balancer.make().findTarget(host);
+
+        String url =
+                exchange.getRequestScheme() + "://" +
+                        target +
+                        exchange.getRequestPath() +
+                        (exchange.getQueryString() == null ? "" : "?" + exchange.getQueryString());
+
+        LOGGER.info("sendTo " + url);
 
         exchange.dispatch(new RedirectHandler(url));
     }

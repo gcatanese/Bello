@@ -1,5 +1,6 @@
 package com.perosa.bello.core.resource.data;
 
+import com.perosa.bello.core.resource.ResourceHost;
 import com.perosa.bello.core.resource.ResourcePool;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -20,28 +21,23 @@ class ResourceDatastoreTest {
 
         String json = "[\n" +
                 "  {\n" +
-                "    \"path\": \"/\",\n" +
-                "    \"hosts\": [\n" +
-                "      {\n" +
-                "        \"host\": \"host1.perosa.com\",\n" +
-                "        \"status\": \"1\"\n" +
-                "      },\n" +
-                "      {\n" +
-                "        \"host\": \"host2.perosa.com\",\n" +
-                "        \"status\": \"1\"\n" +
-                "      },\n" +
-                "      {\n" +
-                "        \"host\": \"host3.perosa.com\",\n" +
-                "        \"status\": \"0\"\n" +
-                "      }\n" +
-                "    ]\n" +
+                "    \"host\": \"host1.perosa.com\",\n" +
+                "    \"available\": \"1\"\n" +
+                "  },\n" +
+                "  {\n" +
+                "    \"host\": \"host2.perosa.com\",\n" +
+                "    \"available\": \"1\"\n" +
+                "  },\n" +
+                "  {\n" +
+                "    \"host\": \"host3.perosa.com\",\n" +
+                "    \"available\": \"0\"\n" +
                 "  }\n" +
-                "]";
+                "]\n";
 
-        List<ResourcePool> list = new ResourceDatastore().unmarshal(json);
+        List<ResourceHost> list = new ResourceDatastore().unmarshal(json);
 
         assertNotNull(list);
-        assertEquals(1, list.size());
+        assertEquals(3, list.size());
 
     }
 

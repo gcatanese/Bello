@@ -1,7 +1,6 @@
 package com.perosa.bello.core;
 
 import com.perosa.bello.core.resource.ResourceHost;
-import com.perosa.bello.core.resource.ResourcePool;
 import com.perosa.bello.core.resource.data.ResourceCache;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,13 +16,17 @@ public abstract class CoreBalancer implements Balancer {
 
     public String findTarget(String host) {
 
-        List<ResourcePool> list = ResourceCache.getResourcePools();
+        List<ResourceHost> list = ResourceCache.getResourceHosts();
 
-        List<ResourceHost> availableHosts = getAvailableHosts(list.get(0).getResourceHostList());
+        List<ResourceHost> availableHosts = getAvailableHosts(list);
 
         ResourceHost resourceHost = findNext(availableHosts);
 
-        return resourceHost.getHost();
+        String target = resourceHost.getHost();
+
+        LOGGER.debug("--->" + target);
+
+        return target;
     }
 
     List<ResourceHost> getAvailableHosts(List<ResourceHost> list) {
