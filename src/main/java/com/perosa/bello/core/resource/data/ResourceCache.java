@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
+import java.util.Optional;
 
 public class ResourceCache {
 
@@ -24,5 +25,25 @@ public class ResourceCache {
     public static void invalidate() {
         resourceHosts = null;
     }
+
+    public static void setAsUnavailable(String host) {
+        LOGGER.warn("setAsUnavailable " + host);
+        setStatus(host, 0);
+    }
+
+    public static void setAsAvailable(String host) {
+        setStatus(host, 1);
+    }
+
+    static void setStatus(String host, int status) {
+        Optional<ResourceHost> resourceHost = getResourceHosts().stream()
+                .filter(h -> h.getHost().equals(host))
+                .findAny();
+
+        if(resourceHost.isPresent()) {
+            resourceHost.get().setAvailable(status);
+        }
+    }
+
 
 }

@@ -1,9 +1,6 @@
 package com.perosa.bello.core;
 
 import com.perosa.bello.core.resource.ResourceHost;
-import com.perosa.bello.core.resource.ResourcePool;
-import com.perosa.bello.core.resource.data.ResourceCache;
-import com.perosa.bello.core.resource.data.ResourceDatastore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
