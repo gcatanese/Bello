@@ -1,31 +1,27 @@
 package com.perosa.bello.core;
 
 import com.perosa.bello.core.resource.ResourceHost;
-import com.perosa.bello.core.resource.ResourceManager;
+import com.perosa.bello.core.resource.ResourcePool;
+import com.perosa.bello.core.resource.data.ResourceCache;
+import com.perosa.bello.core.resource.data.ResourceDatastore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
-public class RandomBalancer implements Balancer {
+public class RandomBalancer extends CoreBalancer implements Balancer {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RandomBalancer.class);
 
-    private ResourceManager resourceManager;
+    ResourceHost findNext(List<ResourceHost> hosts) {
+        ResourceHost resourceHost = null;
 
-    public String findTarget(String requestedUrl) {
+        ResourceHost next = hosts.stream()
+                .skip((int) (hosts.size() * Math.random()))
+                .findAny()
+                .get();
 
-        List<ResourceHost> list = getResourceManager().getResourcePools();
-
-
-        return null;
+        return resourceHost;
     }
 
-    public ResourceManager getResourceManager() {
-        return resourceManager;
-    }
-
-    public void setResourceManager(ResourceManager resourceManager) {
-        this.resourceManager = resourceManager;
-    }
 }
