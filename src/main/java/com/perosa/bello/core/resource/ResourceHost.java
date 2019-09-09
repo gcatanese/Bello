@@ -4,6 +4,7 @@ public class ResourceHost {
 
     private String host;
     private int available = 1;
+    private String healthCheck;
 
     public ResourceHost() {
     }
@@ -35,6 +36,14 @@ public class ResourceHost {
 
     public boolean isAvailable() {
         return getAvailable() == 1;
+    }
+
+    public String getHealthCheck() {
+        return healthCheck;
+    }
+
+    public void setHealthCheck(String healthCheck) {
+        this.healthCheck = healthCheck;
     }
 
     @Override
