@@ -1,6 +1,8 @@
 package com.perosa.bello.server;
 
 import com.perosa.bello.core.Balancer;
+import com.perosa.bello.core.resource.channel.Channel;
+import com.perosa.bello.core.resource.channel.ChannelFactory;
 import io.undertow.Undertow;
 import io.undertow.server.HttpHandler;
 import io.undertow.server.HttpServerExchange;
@@ -63,9 +65,12 @@ public class Listener {
     }
 
     private void dispatch(HttpServerExchange exchange) {
-        String host = exchange.getHostName();
 
-        String target = Balancer.make().findTarget(host);
+        InRequest request = new InRequest();
+        request.setHost(exchange.getHostName());
+        request.setPayload(extractBody(exchange));
+
+        String target = Balancer.make().findTarget(request);
 
         String url =
                 exchange.getRequestScheme() + "://" +
@@ -76,6 +81,16 @@ public class Listener {
         LOGGER.info("sendTo " + url);
 
         exchange.dispatch(new RedirectHandler(url));
+    }
+
+    String extractBody(HttpServerExchange exchange) {
+        StringBuilder requestBody = new StringBuilder();
+
+        exchange.getRequestReceiver().receiveFullString((ex, data) -> {
+            requestBody.append(data);
+        });
+
+        return requestBody.toString();
     }
 
     public int getPort() {

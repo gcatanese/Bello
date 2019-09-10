@@ -1,7 +1,11 @@
 package com.perosa.bello.core;
 
 import com.perosa.bello.core.resource.ResourceHost;
+import com.perosa.bello.core.resource.SessionCache;
+import com.perosa.bello.core.resource.channel.Channel;
+import com.perosa.bello.core.resource.channel.ChannelFactory;
 import com.perosa.bello.core.resource.data.ResourceCache;
+import com.perosa.bello.server.InRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,9 +16,21 @@ public abstract class CoreBalancer implements Balancer {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CoreBalancer.class);
 
+    private SessionCache sessionCache = SessionCache.make();
+
     abstract ResourceHost findNext(List<ResourceHost> hosts);
 
-    public String findTarget(String host) {
+    public String findTarget(InRequest request) {
+
+        String sessionId = extractSessionId(request);
+
+        if (sessionId != null) {
+            String host = get(sessionId);
+            if (host != null) {
+                return host;
+            }
+        }
+
 
         List<ResourceHost> list = ResourceCache.getResourceHosts();
 
@@ -23,6 +39,8 @@ public abstract class CoreBalancer implements Balancer {
         ResourceHost resourceHost = findNext(availableHosts);
 
         String target = resourceHost.getHost();
+
+        put(sessionId, target);
 
         LOGGER.debug("--->" + target);
 
@@ -39,6 +57,28 @@ public abstract class CoreBalancer implements Balancer {
         }
 
         return hosts;
+    }
+
+    String get(String sessionId) {
+        return sessionCache.get(sessionId);
+    }
+
+    void put(String sessionId, String host) {
+        sessionCache.put(sessionId, host);
+    }
+
+    Channel getChannel(String payload) {
+        return ChannelFactory.make(payload);
+    }
+
+    String extractSessionId(InRequest request) {
+        String sessionId = null;
+
+        if (request.getPayload() != null) {
+            sessionId = getChannel(request.getPayload()).extractSessionId();
+        }
+
+        return sessionId;
     }
 
 }
