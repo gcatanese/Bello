@@ -38,7 +38,6 @@ public abstract class CoreBalancer implements Balancer {
             }
         }
 
-
         ResourceHost resourceHost = findNext(getAvailableHosts(HostCache.getResourceHosts()));
 
         String target = resourceHost.getHost();
