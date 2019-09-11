@@ -11,8 +11,6 @@ public class ChannelProcessor implements Channel {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ChannelProcessor.class);
 
-    String sessionId = null;
-
     public ChannelProcessor() {
 
     }
@@ -22,19 +20,7 @@ public class ChannelProcessor implements Channel {
         String ret = extractFromDialogFlow(payload);
 
 
-//        if (tryDialogFlow()) {
-//            return;
-//        }
-//
-//        if (tryMsBot()) {
-//            return;
-//        }
-//
-//        if (tryChatfuel()) {
-//            return;
-//        }
-
-        return "1";
+        return ret;
 
 
     }
@@ -49,18 +35,6 @@ public class ChannelProcessor implements Channel {
             ret = session;
         }
 
-
-        return ret;
-    }
-
-    boolean tryMsBot() {
-        boolean ret = false;
-
-        return ret;
-    }
-
-    boolean tryChatfuel() {
-        boolean ret = false;
 
         return ret;
     }
