@@ -1,17 +1,17 @@
 [
   {
-    "host": "host1.perosa.com",
+    "host": "downstreamservice.herokuapp.com",
     "available": "1",
     "healthCheck": "/"
   },
   {
-    "host": "host2.perosa.com",
+    "host": "downstreamservicev2.herokuapp.com",
     "available": "1",
     "healthCheck": "/"
   },
   {
     "host": "host3.perosa.com",
-    "available": "0",
+    "available": "1",
     "healthCheck": "/"
   }
 ]

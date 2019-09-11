@@ -24,6 +24,8 @@ public class RoundRobinBalancer extends CoreBalancer implements Balancer {
     public ResourceHost findNext(List<ResourceHost> hosts) {
         ResourceHost resourceHost = null;
 
+        LOGGER.debug("Last used #" + last);
+
         if(last == hosts.size()) {
             last = 0;
         }

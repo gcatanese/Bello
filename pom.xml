@@ -88,7 +88,7 @@
                 <configuration>
                     <trimStackTrace>false</trimStackTrace>
                     <systemPropertyVariables>
-                        <bt.home>src/test/resources/</bt.home>
+                        <config>src/test/resources/</config>
                     </systemPropertyVariables>
                 </configuration>
             </plugin>

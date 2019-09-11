@@ -3,6 +3,7 @@ package com.perosa.bello.core.resource.host;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.perosa.bello.core.config.Env;
 import com.perosa.bello.core.resource.ResourceHost;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +17,12 @@ import java.util.List;
 public class HostDatastore {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(HostDatastore.class);
+
+    private Env env;
+
+    public HostDatastore() {
+        this.env = new Env();
+    }
 
     public List<ResourceHost> load() {
 
@@ -62,7 +69,14 @@ public class HostDatastore {
     }
 
     private String getFilePath() {
-        return "config/hosts.json";
+        return getEnv().getConfig() + "hosts.json";
     }
 
+    public Env getEnv() {
+        return env;
+    }
+
+    public void setEnv(Env env) {
+        this.env = env;
+    }
 }

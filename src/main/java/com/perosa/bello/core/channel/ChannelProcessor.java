@@ -19,14 +19,13 @@ public class ChannelProcessor implements Channel {
 
         String ret = extractFromDialogFlow(payload);
 
-
         return ret;
 
 
     }
 
     String extractFromDialogFlow(String payload) {
-        String ret = "";
+        String ret = null;
 
         String session = findElement("/session", payload);
         String responseId = findElement("/responseId", payload);
@@ -40,7 +39,7 @@ public class ChannelProcessor implements Channel {
     }
 
     String findElement(String path, String payload) {
-        String ret = "";
+        String ret = null;
 
         if (payload != null) {
             try {

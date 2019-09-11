@@ -32,6 +32,8 @@ public abstract class CoreBalancer implements Balancer {
         if (sessionId != null) {
             String host = get(sessionId);
             if (host != null) {
+                LOGGER.debug("host from map: " + host);
+
                 return host;
             }
         }
@@ -79,6 +81,8 @@ public abstract class CoreBalancer implements Balancer {
         if (request.getPayload() != null) {
             sessionId = getChannel().extract(request.getPayload());
         }
+
+        LOGGER.debug("extractSessionId " + sessionId);
 
         return sessionId;
     }
