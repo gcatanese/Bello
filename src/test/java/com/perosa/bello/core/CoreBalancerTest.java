@@ -108,7 +108,6 @@ class CoreBalancerTest {
             List<ResourceHost> list = new LocalCoreBalancer(sessionCache, channel).getAvailableHosts(hosts);
         });
 
-
     }
 
     @Test
