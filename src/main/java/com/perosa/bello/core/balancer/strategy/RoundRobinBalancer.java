@@ -1,8 +1,10 @@
-package com.perosa.bello.core;
+package com.perosa.bello.core.balancer.strategy;
 
+import com.perosa.bello.core.balancer.Balancer;
+import com.perosa.bello.core.balancer.CoreBalancer;
 import com.perosa.bello.core.resource.ResourceHost;
-import com.perosa.bello.core.resource.SessionCache;
-import com.perosa.bello.core.resource.channel.Channel;
+import com.perosa.bello.core.resource.session.SessionCache;
+import com.perosa.bello.core.channel.Channel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,7 +21,7 @@ public class RoundRobinBalancer extends CoreBalancer implements Balancer {
         LOGGER.debug("Last used #" + last);
     }
 
-    ResourceHost findNext(List<ResourceHost> hosts) {
+    public ResourceHost findNext(List<ResourceHost> hosts) {
         ResourceHost resourceHost = null;
 
         if(last == hosts.size()) {

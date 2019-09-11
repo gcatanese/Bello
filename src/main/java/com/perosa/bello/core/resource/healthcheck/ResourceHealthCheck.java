@@ -1,6 +1,7 @@
-package com.perosa.bello.core.resource.data;
+package com.perosa.bello.core.resource.healthcheck;
 
 import com.perosa.bello.core.resource.ResourceHost;
+import com.perosa.bello.core.resource.host.HostCache;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -33,7 +34,7 @@ public class ResourceHealthCheck {
     }
 
     void runHealthCheck() {
-        ResourceCache.getResourceHosts().stream()
+        HostCache.getResourceHosts().stream()
                 .forEach(h -> ping(h));
 
     }
@@ -44,14 +45,14 @@ public class ResourceHealthCheck {
             int responseCode = healthCheckClient.ping(getHealthCheckUrl(resourceHost));
 
             if (responseCode == 200) {
-                ResourceCache.setAsAvailable(resourceHost.getHost());
+                HostCache.setAsAvailable(resourceHost.getHost());
             } else {
-                ResourceCache.setAsUnavailable(resourceHost.getHost());
+                HostCache.setAsUnavailable(resourceHost.getHost());
             }
 
         } catch (Exception e) {
             LOGGER.debug(e.getMessage(), e);
-            ResourceCache.setAsUnavailable(resourceHost.getHost());
+            HostCache.setAsUnavailable(resourceHost.getHost());
         }
     }
 

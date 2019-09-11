@@ -1,4 +1,4 @@
-package com.perosa.bello.core.resource;
+package com.perosa.bello.core.resource.session;
 
 public interface SessionCache {
 

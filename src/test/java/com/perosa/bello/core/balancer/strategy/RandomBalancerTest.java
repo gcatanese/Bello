@@ -1,15 +1,14 @@
-package com.perosa.bello.core;
+package com.perosa.bello.core.balancer.strategy;
 
 import com.perosa.bello.core.resource.ResourceHost;
-import com.perosa.bello.core.resource.SessionCache;
-import com.perosa.bello.core.resource.channel.Channel;
+import com.perosa.bello.core.resource.session.SessionCache;
+import com.perosa.bello.core.channel.Channel;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class RandomBalancerTest {

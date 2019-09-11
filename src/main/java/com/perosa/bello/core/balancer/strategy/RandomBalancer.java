@@ -1,8 +1,10 @@
-package com.perosa.bello.core;
+package com.perosa.bello.core.balancer.strategy;
 
+import com.perosa.bello.core.balancer.Balancer;
+import com.perosa.bello.core.balancer.CoreBalancer;
 import com.perosa.bello.core.resource.ResourceHost;
-import com.perosa.bello.core.resource.SessionCache;
-import com.perosa.bello.core.resource.channel.Channel;
+import com.perosa.bello.core.resource.session.SessionCache;
+import com.perosa.bello.core.channel.Channel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,7 +18,7 @@ public class RandomBalancer extends CoreBalancer implements Balancer {
         super(sessionCache, channel);
     }
 
-    ResourceHost findNext(List<ResourceHost> hosts) {
+    public ResourceHost findNext(List<ResourceHost> hosts) {
 
         return hosts.stream()
                 .skip((int) (hosts.size() * Math.random()))

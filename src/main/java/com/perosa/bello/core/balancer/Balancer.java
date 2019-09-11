@@ -1,7 +1,8 @@
-package com.perosa.bello.core;
+package com.perosa.bello.core.balancer;
 
-import com.perosa.bello.core.resource.SessionCache;
-import com.perosa.bello.core.resource.channel.ChannelFactory;
+import com.perosa.bello.core.balancer.strategy.RoundRobinBalancer;
+import com.perosa.bello.core.resource.session.SessionCache;
+import com.perosa.bello.core.channel.ChannelFactory;
 import com.perosa.bello.server.InRequest;
 
 public interface Balancer {

@@ -1,4 +1,4 @@
-package com.perosa.bello.core.resource.channel;
+package com.perosa.bello.core.channel;
 
 public interface Channel {
 

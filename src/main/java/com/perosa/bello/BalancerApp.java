@@ -1,8 +1,8 @@
 package com.perosa.bello;
 
-import com.perosa.bello.core.Balancer;
-import com.perosa.bello.core.resource.data.HealthCheckClient;
-import com.perosa.bello.core.resource.data.ResourceHealthCheck;
+import com.perosa.bello.core.balancer.Balancer;
+import com.perosa.bello.core.resource.healthcheck.HealthCheckClient;
+import com.perosa.bello.core.resource.healthcheck.ResourceHealthCheck;
 import com.perosa.bello.server.DispatchLogic;
 import com.perosa.bello.server.Listener;
 import org.slf4j.Logger;

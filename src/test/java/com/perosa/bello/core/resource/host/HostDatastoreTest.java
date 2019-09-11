@@ -1,7 +1,6 @@
-package com.perosa.bello.core.resource.data;
+package com.perosa.bello.core.resource.host;
 
 import com.perosa.bello.core.resource.ResourceHost;
-import com.perosa.bello.core.resource.ResourcePool;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,9 +10,9 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ResourceDatastoreTest {
+class HostDatastoreTest {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ResourceDatastoreTest.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(HostDatastoreTest.class);
 
 
     @Test
@@ -34,7 +33,7 @@ class ResourceDatastoreTest {
                 "  }\n" +
                 "]\n";
 
-        List<ResourceHost> list = new ResourceDatastore().unmarshal(json);
+        List<ResourceHost> list = new HostDatastore().unmarshal(json);
 
         assertNotNull(list);
         assertEquals(3, list.size());
@@ -44,7 +43,7 @@ class ResourceDatastoreTest {
     @Test
     void getJson() throws IOException {
 
-        String json = new ResourceDatastore().getJson("src/test/resources/hosts.json");
+        String json = new HostDatastore().getJson("src/test/resources/hosts.json");
 
         LOGGER.info(json);
 

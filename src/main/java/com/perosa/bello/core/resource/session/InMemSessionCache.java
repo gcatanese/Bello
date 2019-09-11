@@ -1,4 +1,4 @@
-package com.perosa.bello.core.resource;
+package com.perosa.bello.core.resource.session;
 
 import java.util.HashMap;
 import java.util.Map;

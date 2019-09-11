@@ -1,6 +1,6 @@
 package com.perosa.bello.server;
 
-import com.perosa.bello.core.Balancer;
+import com.perosa.bello.core.balancer.Balancer;
 import io.undertow.server.HttpHandler;
 import io.undertow.server.HttpServerExchange;
 import org.junit.jupiter.api.Test;

@@ -1,4 +1,4 @@
-package com.perosa.bello.core.resource.channel;
+package com.perosa.bello.core.channel;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;

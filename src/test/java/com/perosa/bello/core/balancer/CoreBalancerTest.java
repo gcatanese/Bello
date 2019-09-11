@@ -1,8 +1,8 @@
-package com.perosa.bello.core;
+package com.perosa.bello.core.balancer;
 
 import com.perosa.bello.core.resource.ResourceHost;
-import com.perosa.bello.core.resource.SessionCache;
-import com.perosa.bello.core.resource.channel.Channel;
+import com.perosa.bello.core.resource.session.SessionCache;
+import com.perosa.bello.core.channel.Channel;
 import com.perosa.bello.server.InRequest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -130,7 +130,7 @@ class LocalCoreBalancer extends CoreBalancer {
         super(sessionCache, channel);
     }
 
-    ResourceHost findNext(List<ResourceHost> hosts) {
+    public ResourceHost findNext(List<ResourceHost> hosts) {
         return new ResourceHost("localhost");
     }
 }

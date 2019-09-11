@@ -1,4 +1,4 @@
-package com.perosa.bello.core.resource.data;
+package com.perosa.bello.core.resource.host;
 
 import com.perosa.bello.core.resource.ResourceHost;
 import org.slf4j.Logger;
@@ -7,16 +7,16 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 import java.util.Optional;
 
-public class ResourceCache {
+public class HostCache {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ResourceCache.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(HostCache.class);
 
     private static List<ResourceHost> resourceHosts = null;
 
     public static List<ResourceHost> getResourceHosts() {
 
         if(resourceHosts == null) {
-            resourceHosts = new ResourceDatastore().load();
+            resourceHosts = new HostDatastore().load();
         }
 
         return resourceHosts;

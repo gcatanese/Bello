@@ -1,9 +1,9 @@
-package com.perosa.bello.core;
+package com.perosa.bello.core.balancer;
 
 import com.perosa.bello.core.resource.ResourceHost;
-import com.perosa.bello.core.resource.SessionCache;
-import com.perosa.bello.core.resource.channel.Channel;
-import com.perosa.bello.core.resource.data.ResourceCache;
+import com.perosa.bello.core.resource.session.SessionCache;
+import com.perosa.bello.core.channel.Channel;
+import com.perosa.bello.core.resource.host.HostCache;
 import com.perosa.bello.server.InRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +23,7 @@ public abstract class CoreBalancer implements Balancer {
         this.channel = channel;
     }
 
-    abstract ResourceHost findNext(List<ResourceHost> hosts);
+    abstract public ResourceHost findNext(List<ResourceHost> hosts);
 
     public String findTarget(InRequest request) {
 
@@ -37,7 +37,7 @@ public abstract class CoreBalancer implements Balancer {
         }
 
 
-        List<ResourceHost> list = ResourceCache.getResourceHosts();
+        List<ResourceHost> list = HostCache.getResourceHosts();
 
         List<ResourceHost> availableHosts = getAvailableHosts(list);
 

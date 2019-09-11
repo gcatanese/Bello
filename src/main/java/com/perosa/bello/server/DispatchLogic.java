@@ -1,6 +1,6 @@
 package com.perosa.bello.server;
 
-import com.perosa.bello.core.Balancer;
+import com.perosa.bello.core.balancer.Balancer;
 import io.undertow.server.HttpServerExchange;
 import io.undertow.server.handlers.RedirectHandler;
 import org.slf4j.Logger;

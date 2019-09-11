@@ -1,19 +1,19 @@
-package com.perosa.bello.core.resource.data;
+package com.perosa.bello.core.resource.host;
 
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ResourceCacheTest {
+class HostCacheTest {
 
     @Test
     void setAsUnavailable() {
 
         final String HOST = "host1.perosa.com";
 
-        ResourceCache.setAsUnavailable(HOST);
+        HostCache.setAsUnavailable(HOST);
 
-        assertFalse(ResourceCache.getResourceHosts().stream()
+        assertFalse(HostCache.getResourceHosts().stream()
         .filter(h -> h.getHost().equals(HOST))
         .findAny().get().isAvailable());
     }
@@ -23,16 +23,16 @@ class ResourceCacheTest {
 
         final String HOST = "host3.perosa.com";
 
-        ResourceCache.setAsAvailable(HOST);
+        HostCache.setAsAvailable(HOST);
 
-        assertTrue(ResourceCache.getResourceHosts().stream()
+        assertTrue(HostCache.getResourceHosts().stream()
                 .filter(h -> h.getHost().equals(HOST))
                 .findAny().get().isAvailable());
     }
 
     @Test
     void getResourceHosts() {
-        assertNotNull(ResourceCache.getResourceHosts());
+        assertNotNull(HostCache.getResourceHosts());
 
     }
 }
