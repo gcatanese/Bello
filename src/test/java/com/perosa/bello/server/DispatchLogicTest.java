@@ -1,5 +1,6 @@
 package com.perosa.bello.server;
 
+import com.perosa.bello.core.Balancer;
 import io.undertow.server.HttpHandler;
 import io.undertow.server.HttpServerExchange;
 import org.junit.jupiter.api.Test;
@@ -16,7 +17,8 @@ class DispatchLogicTest {
 
     @Mock
     HttpServerExchange exchange;
-
+    @Mock
+    Balancer balancer;
 
     @Test
     void dispatch() {
@@ -24,9 +26,10 @@ class DispatchLogicTest {
         when(exchange.getRequestPath()).thenReturn("/webhook");
         when(exchange.getQueryString()).thenReturn("user=perosa");
 
-        new DispatchLogic().dispatch(exchange);
+        new DispatchLogic(balancer).dispatch(exchange);
 
         verify(exchange, times(1)).dispatch(isA(HttpHandler.class));
+        verify(balancer, times(1)).findTarget(isA(InRequest.class));
     }
 
     @Test
@@ -35,7 +38,7 @@ class DispatchLogicTest {
         when(exchange.getRequestPath()).thenReturn("/webhook");
         when(exchange.getQueryString()).thenReturn("user=perosa");
 
-        assertEquals("https://localhost/webhook?user=perosa", new DispatchLogic().buildUrl(exchange, "localhost"));
+        assertEquals("https://localhost/webhook?user=perosa", new DispatchLogic(balancer).buildUrl(exchange, "localhost"));
     }
 
     @Test
@@ -43,14 +46,14 @@ class DispatchLogicTest {
         when(exchange.getRequestScheme()).thenReturn("https");
         when(exchange.getRequestPath()).thenReturn("/webhook");
 
-        assertEquals("https://localhost/webhook", new DispatchLogic().buildUrl(exchange, "localhost"));
+        assertEquals("https://localhost/webhook", new DispatchLogic(balancer).buildUrl(exchange, "localhost"));
     }
 
     @Test
     void getRequest() {
         when(exchange.getHostName()).thenReturn("localhost");
 
-        InRequest request = new DispatchLogic().getRequest(exchange);
+        InRequest request = new DispatchLogic(balancer).getRequest(exchange);
 
         assertNotNull(request);
         assertEquals("localhost", request.getHost());

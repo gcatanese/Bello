@@ -1,5 +1,6 @@
 package com.perosa.bello;
 
+import com.perosa.bello.core.Balancer;
 import com.perosa.bello.core.resource.data.HealthCheckClient;
 import com.perosa.bello.core.resource.data.ResourceHealthCheck;
 import com.perosa.bello.server.DispatchLogic;
@@ -13,7 +14,7 @@ public class BalancerApp {
 
     public static void main(String[] args) {
 
-        new Listener(new DispatchLogic()).setUp();
+        new Listener(new DispatchLogic(Balancer.getInstance())).setUp();
 
         new ResourceHealthCheck(new HealthCheckClient()).start();
 

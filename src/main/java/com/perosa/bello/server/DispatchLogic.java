@@ -12,8 +12,8 @@ public class DispatchLogic {
 
     private Balancer balancer;
 
-    public DispatchLogic() {
-        this.balancer = Balancer.getInstance();
+    public DispatchLogic(Balancer balancer) {
+        this.balancer = balancer;
     }
 
     void dispatch(HttpServerExchange exchange) {
