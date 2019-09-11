@@ -113,11 +113,13 @@ class CoreBalancerTest {
 
     @Test
     void get() {
+        String sessionID = new LocalCoreBalancer(sessionCache, channel).get("s01");
         verify(sessionCache, times(1)).get(isA(String.class));
     }
 
     @Test
     void put() {
+        new LocalCoreBalancer(sessionCache, channel).put("s01", "localhost");
         verify(sessionCache, times(1)).put(isA(String.class), isA(String.class));
     }
 
@@ -128,6 +130,7 @@ class LocalCoreBalancer extends CoreBalancer {
     LocalCoreBalancer(SessionCache sessionCache, Channel channel) {
         super(sessionCache, channel);
     }
+
     ResourceHost findNext(List<ResourceHost> hosts) {
         return new ResourceHost("localhost");
     }
