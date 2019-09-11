@@ -6,7 +6,7 @@ public interface Balancer {
 
     String findTarget(InRequest request);
 
-    static Balancer make() {
+    static Balancer getInstance() {
         return new RoundRobinBalancer();
     }
 }

@@ -1,22 +1,21 @@
 package com.perosa.bello.server;
 
-import com.perosa.bello.core.Balancer;
-import com.perosa.bello.core.resource.channel.Channel;
-import com.perosa.bello.core.resource.channel.ChannelFactory;
 import io.undertow.Undertow;
 import io.undertow.server.HttpHandler;
 import io.undertow.server.HttpServerExchange;
-import io.undertow.server.handlers.RedirectHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.net.InetSocketAddress;
 
 public class Listener {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Listener.class);
 
     private static Undertow builder = null;
+    private DispatchLogic dispatchLogic = null;
+
+    public Listener(DispatchLogic dispatchLogic) {
+        this.dispatchLogic = dispatchLogic;
+    }
 
     public void setUp() {
 
@@ -34,22 +33,18 @@ public class Listener {
                             @Override
                             public void handleRequest(HttpServerExchange exchange) throws Exception {
 
-                                LOGGER.info("exchange " + exchange);
+                                LOGGER.debug("exchange " + exchange);
 
                                 try {
-                                    doHandleRequest(exchange);
-
+                                    getDispatchLogic().dispatch(exchange);
                                 } catch (Exception e) {
-                                    LOGGER.error(e.getMessage(), e);
                                     exchange.setStatusCode(404);
                                 }
 
                             }
-                        })
-                        .build();
+                        }).build();
 
                 builder.start();
-
             }
 
         } catch (Exception e) {
@@ -59,41 +54,16 @@ public class Listener {
 
     }
 
-    private void doHandleRequest(HttpServerExchange exchange) {
-        dispatch(exchange);
-
-    }
-
-    private void dispatch(HttpServerExchange exchange) {
-
-        InRequest request = new InRequest();
-        request.setHost(exchange.getHostName());
-        request.setPayload(extractBody(exchange));
-
-        String target = Balancer.make().findTarget(request);
-
-        String url =
-                exchange.getRequestScheme() + "://" +
-                        target +
-                        exchange.getRequestPath() +
-                        (exchange.getQueryString() == null ? "" : "?" + exchange.getQueryString());
-
-        LOGGER.info("sendTo " + url);
-
-        exchange.dispatch(new RedirectHandler(url));
-    }
-
-    String extractBody(HttpServerExchange exchange) {
-        StringBuilder requestBody = new StringBuilder();
-
-        exchange.getRequestReceiver().receiveFullString((ex, data) -> {
-            requestBody.append(data);
-        });
-
-        return requestBody.toString();
-    }
 
     public int getPort() {
         return 8888;
+    }
+
+    public DispatchLogic getDispatchLogic() {
+        return dispatchLogic;
+    }
+
+    public void setDispatchLogic(DispatchLogic dispatchLogic) {
+        this.dispatchLogic = dispatchLogic;
     }
 }
