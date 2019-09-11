@@ -16,7 +16,11 @@ public abstract class CoreBalancer implements Balancer {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CoreBalancer.class);
 
-    private SessionCache sessionCache = SessionCache.make();
+    private SessionCache sessionCache;
+
+    public CoreBalancer(SessionCache sessionCache) {
+        this.sessionCache =sessionCache;
+    }
 
     abstract ResourceHost findNext(List<ResourceHost> hosts);
 
@@ -81,4 +85,11 @@ public abstract class CoreBalancer implements Balancer {
         return sessionId;
     }
 
+    public SessionCache getSessionCache() {
+        return sessionCache;
+    }
+
+    public void setSessionCache(SessionCache sessionCache) {
+        this.sessionCache = sessionCache;
+    }
 }
