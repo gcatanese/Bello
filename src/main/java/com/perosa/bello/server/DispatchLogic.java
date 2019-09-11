@@ -10,11 +10,17 @@ public class DispatchLogic {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DispatchLogic.class);
 
+    private Balancer balancer;
+
+    public DispatchLogic() {
+        this.balancer = Balancer.getInstance();
+    }
+
     void dispatch(HttpServerExchange exchange) {
 
         InRequest request = getRequest(exchange);
 
-        String target = Balancer.getInstance().findTarget(request);
+        String target = getBalancer().findTarget(request);
 
         String url = buildUrl(exchange, target);
 
@@ -41,7 +47,7 @@ public class DispatchLogic {
     String extractBody(HttpServerExchange exchange) {
         StringBuilder requestBody = new StringBuilder();
 
-        if(exchange.getRequestReceiver() != null) {
+        if (exchange.getRequestReceiver() != null) {
             exchange.getRequestReceiver().receiveFullString((ex, data) -> {
                 requestBody.append(data);
             });
@@ -50,5 +56,11 @@ public class DispatchLogic {
         return requestBody.toString();
     }
 
+    public Balancer getBalancer() {
+        return balancer;
+    }
 
+    public void setBalancer(Balancer balancer) {
+        this.balancer = balancer;
+    }
 }
