@@ -3,7 +3,6 @@ package com.perosa.bello.core;
 import com.perosa.bello.core.resource.ResourceHost;
 import com.perosa.bello.core.resource.SessionCache;
 import com.perosa.bello.core.resource.channel.Channel;
-import com.perosa.bello.core.resource.channel.ChannelFactory;
 import com.perosa.bello.core.resource.data.ResourceCache;
 import com.perosa.bello.server.InRequest;
 import org.slf4j.Logger;
