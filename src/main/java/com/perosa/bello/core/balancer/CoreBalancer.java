@@ -78,7 +78,7 @@ public abstract class CoreBalancer implements Balancer {
     String extractSessionId(InRequest request) {
         String sessionId = null;
 
-        if (request.getPayload() != null) {
+        if (request.getPayload() != null && !request.getPayload().isEmpty()) {
             sessionId = getChannel().extract(request.getPayload());
         }
 

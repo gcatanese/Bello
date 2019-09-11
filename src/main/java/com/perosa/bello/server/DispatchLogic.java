@@ -45,6 +45,8 @@ public class DispatchLogic {
     }
 
     String extractBody(HttpServerExchange exchange) {
+        String body = null;
+
         StringBuilder requestBody = new StringBuilder();
 
         if (exchange.getRequestReceiver() != null) {
@@ -53,7 +55,11 @@ public class DispatchLogic {
             });
         }
 
-        return requestBody.toString();
+        if(requestBody.length() > 0) {
+            body = requestBody.toString();
+        }
+
+        return body;
     }
 
     public Balancer getBalancer() {
