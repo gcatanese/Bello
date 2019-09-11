@@ -11,46 +11,42 @@ public class ChannelProcessor implements Channel {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ChannelProcessor.class);
 
-    String payload = null;
     String sessionId = null;
 
-    public ChannelProcessor(String payload) {
-        this.payload = payload;
-
-        process();
-    }
-
-    public String extractSessionId() {
-        return sessionId;
-    }
-
-    void process() {
-
-
-        if (tryDialogFlow()) {
-            return;
-        }
-
-        if (tryMsBot()) {
-            return;
-        }
-
-        if (tryChatfuel()) {
-            return;
-        }
-
+    public ChannelProcessor() {
 
     }
 
-    boolean tryDialogFlow() {
-        boolean ret = false;
+    public String extract(String payload) {
 
-        String session = findElement("/session");
-        String responseId = findElement("/responseId");
+        String ret = extractFromDialogFlow(payload);
+
+
+//        if (tryDialogFlow()) {
+//            return;
+//        }
+//
+//        if (tryMsBot()) {
+//            return;
+//        }
+//
+//        if (tryChatfuel()) {
+//            return;
+//        }
+
+        return "1";
+
+
+    }
+
+    String extractFromDialogFlow(String payload) {
+        String ret = "";
+
+        String session = findElement("/session", payload);
+        String responseId = findElement("/responseId", payload);
 
         if (!responseId.isEmpty() && !session.isEmpty()) {
-            this.sessionId = session;
-            ret = true;
+            ret = session;
         }
 
 
@@ -69,7 +65,7 @@ public class ChannelProcessor implements Channel {
         return ret;
     }
 
-    String findElement(String path) {
+    String findElement(String path, String payload) {
         String ret = "";
 
         if (payload != null) {

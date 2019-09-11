@@ -2,6 +2,7 @@ package com.perosa.bello.core;
 
 import com.perosa.bello.core.resource.ResourceHost;
 import com.perosa.bello.core.resource.SessionCache;
+import com.perosa.bello.core.resource.channel.Channel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,8 +14,8 @@ public class RoundRobinBalancer extends CoreBalancer implements Balancer {
 
     private static int last = 0;
 
-    public RoundRobinBalancer(SessionCache sessionCache) {
-        super(sessionCache);
+    public RoundRobinBalancer(SessionCache sessionCache, Channel channel) {
+        super(sessionCache, channel);
         LOGGER.debug("Last used #" + last);
     }
 

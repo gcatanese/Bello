@@ -19,8 +19,9 @@ public abstract class CoreBalancer implements Balancer {
     private SessionCache sessionCache;
     private Channel channel;
 
-    public CoreBalancer(SessionCache sessionCache) {
+    public CoreBalancer(SessionCache sessionCache, Channel channel) {
         this.sessionCache = sessionCache;
+        this.channel = channel;
     }
 
     abstract ResourceHost findNext(List<ResourceHost> hosts);
@@ -72,15 +73,12 @@ public abstract class CoreBalancer implements Balancer {
         sessionCache.put(sessionId, host);
     }
 
-    Channel getChannel(String payload) {
-        return ChannelFactory.make(payload);
-    }
 
     String extractSessionId(InRequest request) {
         String sessionId = null;
 
         if (request.getPayload() != null) {
-            sessionId = getChannel(request.getPayload()).extractSessionId();
+            sessionId = getChannel().extract(request.getPayload());
         }
 
         return sessionId;

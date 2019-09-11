@@ -2,6 +2,7 @@ package com.perosa.bello.core;
 
 import com.perosa.bello.core.resource.ResourceHost;
 import com.perosa.bello.core.resource.SessionCache;
+import com.perosa.bello.core.resource.channel.Channel;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 
@@ -14,12 +15,14 @@ class RoundRobinBalancerTest {
 
     @Mock
     SessionCache sessionCache;
+    @Mock
+    Channel channel;
 
     @Test
     void findNext() {
         List<ResourceHost> hosts = new ArrayList<>();
 
-        RoundRobinBalancer roundRobinBalancer = new RoundRobinBalancer(sessionCache);
+        RoundRobinBalancer roundRobinBalancer = new RoundRobinBalancer(sessionCache, channel);
         roundRobinBalancer.reset();
 
         hosts.add(new ResourceHost("localhost1"));
@@ -37,7 +40,7 @@ class RoundRobinBalancerTest {
     void findAfterNext() {
         List<ResourceHost> hosts = new ArrayList<>();
 
-        RoundRobinBalancer roundRobinBalancer = new RoundRobinBalancer(sessionCache);
+        RoundRobinBalancer roundRobinBalancer = new RoundRobinBalancer(sessionCache, channel);
         roundRobinBalancer.reset();
 
         hosts.add(new ResourceHost("localhost1"));
@@ -57,7 +60,7 @@ class RoundRobinBalancerTest {
     void findAfterRestartQueue() {
         List<ResourceHost> hosts = new ArrayList<>();
 
-        RoundRobinBalancer roundRobinBalancer = new RoundRobinBalancer(sessionCache);
+        RoundRobinBalancer roundRobinBalancer = new RoundRobinBalancer(sessionCache, channel);
         roundRobinBalancer.reset();
 
         hosts.add(new ResourceHost("localhost1"));
