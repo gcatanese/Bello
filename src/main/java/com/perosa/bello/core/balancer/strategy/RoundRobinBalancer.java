@@ -18,13 +18,10 @@ public class RoundRobinBalancer extends CoreBalancer implements Balancer {
 
     public RoundRobinBalancer(SessionCache sessionCache, Channel channel) {
         super(sessionCache, channel);
-        LOGGER.debug("Last used #" + last);
     }
 
     public ResourceHost findNext(List<ResourceHost> hosts) {
         ResourceHost resourceHost = null;
-
-        LOGGER.debug("Last used #" + last);
 
         if(last == hosts.size()) {
             last = 0;

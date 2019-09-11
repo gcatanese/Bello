@@ -49,8 +49,6 @@ public abstract class CoreBalancer implements Balancer {
 
         put(sessionId, target);
 
-        LOGGER.debug("--->" + target);
-
         return target;
     }
 
