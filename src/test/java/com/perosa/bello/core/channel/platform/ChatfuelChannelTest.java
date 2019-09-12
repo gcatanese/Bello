@@ -1,4 +1,4 @@
-package com.perosa.bello.core.channel;
+package com.perosa.bello.core.channel.platform;
 
 import com.perosa.bello.server.InRequest;
 import org.junit.jupiter.api.Test;

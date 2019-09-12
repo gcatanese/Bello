@@ -2,7 +2,6 @@ package com.perosa.bello.core.util;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.perosa.bello.core.channel.DialogFlowChannel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

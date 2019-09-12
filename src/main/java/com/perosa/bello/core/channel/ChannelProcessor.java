@@ -1,5 +1,8 @@
 package com.perosa.bello.core.channel;
 
+import com.perosa.bello.core.channel.platform.ChatfuelChannel;
+import com.perosa.bello.core.channel.platform.DialogFlowChannel;
+import com.perosa.bello.core.channel.platform.UnknownChannel;
 import com.perosa.bello.server.InRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
