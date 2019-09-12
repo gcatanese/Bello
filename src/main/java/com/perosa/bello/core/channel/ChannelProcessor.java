@@ -40,13 +40,11 @@ public class ChannelProcessor implements Channel {
 
     boolean isMsBot(InRequest request) {
         String header = request.getHeaders().get("user-agent");
-
         return header != null && header.toLowerCase().contains("microsoft-botFramework");
     }
 
     boolean isFacebook(InRequest request) {
         String header = request.getHeaders().get("user-agent");
-
         return header != null && header.toLowerCase().contains("facebook");
     }
 
