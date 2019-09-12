@@ -10,7 +10,7 @@ class InMemSessionCacheTest {
 
     @Test
     void get() {
-        InMemSessionCache.map.put("01", "localhost");
+        InMemSessionCache.map.put("01", new SessionInfo("01" ,"localhost"));
 
         assertNotNull(sessionCache.get("01"));
     }
@@ -29,7 +29,7 @@ class InMemSessionCacheTest {
 
     @Test
     void put() {
-        sessionCache.put("02", "host.perosa.com");
+        sessionCache.put("02", new SessionInfo("02" ,"host.perosa.com"));
 
         assertNotNull(InMemSessionCache.map.get("02"));
     }
@@ -38,7 +38,7 @@ class InMemSessionCacheTest {
     void putWithNullKey() {
         InMemSessionCache.map.clear();
 
-        sessionCache.put(null, "host.perosa.com");
+        sessionCache.put(null, new SessionInfo("02" ,"host.perosa.com"));
 
         assertTrue(InMemSessionCache.map.isEmpty());
     }

@@ -3,6 +3,7 @@ package com.perosa.bello.core.balancer;
 import com.perosa.bello.core.resource.ResourceHost;
 import com.perosa.bello.core.resource.session.SessionCache;
 import com.perosa.bello.core.channel.Channel;
+import com.perosa.bello.core.resource.session.SessionInfo;
 import com.perosa.bello.server.InRequest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -40,7 +41,7 @@ class CoreBalancerTest {
         assertNotNull(target);
         verify(sessionCache, times(1)).get(isA(String.class));
         verify(channel, times(1)).extract(isA(InRequest.class));
-        verify(sessionCache, times(1)).put(isA(String.class), isA(String.class));
+        verify(sessionCache, times(1)).put(isA(String.class), isA(SessionInfo.class));
 
     }
 
@@ -112,14 +113,14 @@ class CoreBalancerTest {
 
     @Test
     void get() {
-        String sessionID = new LocalCoreBalancer(sessionCache, channel).get("s01");
+        SessionInfo sessionInfo = new LocalCoreBalancer(sessionCache, channel).get("s01");
         verify(sessionCache, times(1)).get(isA(String.class));
     }
 
     @Test
     void put() {
-        new LocalCoreBalancer(sessionCache, channel).put("s01", "localhost");
-        verify(sessionCache, times(1)).put(isA(String.class), isA(String.class));
+        new LocalCoreBalancer(sessionCache, channel).put("s01", new SessionInfo("s01", "localhost"));
+        verify(sessionCache, times(1)).put(isA(String.class), isA(SessionInfo.class));
     }
 
 }

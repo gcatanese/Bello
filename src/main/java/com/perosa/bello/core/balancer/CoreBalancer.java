@@ -4,6 +4,7 @@ import com.perosa.bello.core.resource.ResourceHost;
 import com.perosa.bello.core.resource.session.SessionCache;
 import com.perosa.bello.core.channel.Channel;
 import com.perosa.bello.core.resource.host.HostCache;
+import com.perosa.bello.core.resource.session.SessionInfo;
 import com.perosa.bello.server.InRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,11 +31,9 @@ public abstract class CoreBalancer implements Balancer {
         String sessionId = extractSessionId(request);
 
         if (sessionId != null) {
-            String host = get(sessionId);
-            if (host != null) {
-                LOGGER.debug("host from map: " + host);
-
-                return host;
+            SessionInfo sessionInfo = get(sessionId);
+            if (sessionInfo != null && sessionInfo.getHost() != null) {
+                return sessionInfo.getHost();
             }
         }
 
@@ -42,7 +41,7 @@ public abstract class CoreBalancer implements Balancer {
 
         String target = resourceHost.getHost();
 
-        put(sessionId, target);
+        put(sessionId, new SessionInfo(sessionId, target));
 
         return target;
     }
@@ -59,12 +58,12 @@ public abstract class CoreBalancer implements Balancer {
         return hosts;
     }
 
-    String get(String sessionId) {
+    SessionInfo get(String sessionId) {
         return sessionCache.get(sessionId);
     }
 
-    void put(String sessionId, String host) {
-        sessionCache.put(sessionId, host);
+    void put(String sessionId, SessionInfo sessionInfo) {
+        sessionCache.put(sessionId, sessionInfo);
     }
 
 
