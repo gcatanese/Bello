@@ -10,6 +10,10 @@ public class InMemSessionCache implements SessionCache {
 
     static Map<String, SessionInfo> map = new HashMap<>();
 
+    public InMemSessionCache() {
+        new InMemSessionThread(this).start();
+    }
+
     @Override
     public SessionInfo get(String sessionId) {
         return map.get(sessionId);
@@ -20,5 +24,9 @@ public class InMemSessionCache implements SessionCache {
         if(sessionId != null) {
             map.put(sessionId, sessionInfo);
         }
+    }
+
+    Map<String, SessionInfo> getMap() {
+        return map;
     }
 }
