@@ -5,7 +5,7 @@ Advanced Delivery Controller (ADC) for Chatbots #adc #loadbalancer #webhook #cro
 
 In the Chatbots world user traffic goes via the selected platform (DialogFlow, Chatfuel, Facebook, Skype, MS Teams, ...) therefore the traditional load balancer model is no longer effective: users cannot be tracked with cookies or IP addresses, devices no longer provide the information you might need.
 
-Image
+![Alt text](wiki/BT.png?raw=true "Title")
 
 ## A Solution
 
