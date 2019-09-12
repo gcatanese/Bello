@@ -17,4 +17,11 @@ Bello is lightweight ADC which distributes incoming Webhook traffic to the avail
 * Support for: DialogFlow, Chatfuel, Facebook, MS Bot
 * In-memory cache
 
+## In the pipeline
+* "Least Load" distribution 
+* "Least Requests" distribution
+* Prometheus events
+* Alternative Cache solution to store Sessions and Hosts
+* Multi-path support
+
 
