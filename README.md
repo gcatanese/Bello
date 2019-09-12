@@ -12,7 +12,7 @@ Image
 Bello is lightweight ADC which distributes incoming Webhook traffic to the available hosts supporting ***RoundRobin*** with ***Session Persistence*** (sticky sessions) parsing the payload to fetch relevant user/session informatiom.
 
 ## Features... to date
-* Session Persistence
+* RoundRobin and Random balacing algorithms with Session Persistence
 * Host healthcheck
 * Support for: DialogFlow, Chatfuel, Facebook, MS Bot
 * In-memory cache
