@@ -57,7 +57,7 @@ class DispatchLogicTest {
 
         assertNotNull(request);
         assertEquals("localhost", request.getHost());
-        assertEquals("", request.getPayload());
+        assertEquals(null, request.getPayload());
     }
 
 }
