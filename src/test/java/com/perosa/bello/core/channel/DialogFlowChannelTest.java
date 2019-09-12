@@ -24,13 +24,13 @@ class DialogFlowChannelTest {
                 "}";
 
 
-        DialogFlowChannel dialogFlowChannel = new DialogFlowChannel();
+        DialogFlowChannel channel = new DialogFlowChannel();
 
         InRequest request = new InRequest();
         request.setHost("localhost");
         request.setPayload(json);
 
-        assertEquals("projects/agent/sessions/001", dialogFlowChannel.extract(request));
+        assertEquals("projects/agent/sessions/001", channel.extract(request));
     }
 
 
