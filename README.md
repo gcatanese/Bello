@@ -1,7 +1,7 @@
 # Bello
 Advanced Delivery Controller (ADC) for Chatbots #adc #loadbalancer #webhook #crossplatform
 
-## Problem
+## Problem: where is my cookie?
 
 In the Chatbots world user traffic goes via the selected platform (DialogFlow, Chatfuel, Facebook, Skype, MS Teams, ...) therefore the traditional load balancer model is no longer effective: users cannot be tracked with cookies or IP addresses, devices no longer provide the information you might need.
 
