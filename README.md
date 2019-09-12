@@ -9,7 +9,7 @@ Image
 
 ## A Solution
 
-Bello is a lightweight ADC which distributes incoming Webhook traffic to the available hosts supporting ***RoundRobin*** with ***Session Persistence*** (sticky sessions), parsing the payload to fetch relevant user/session informatiom.
+Bello is a lightweight ADC which distributes incoming Webhook traffic to the available hosts supporting ***RoundRobin*** with ***Session Persistence*** (sticky sessions), parsing the payload to fetch relevant user/session information.
 
 ## Features... to date
 * RoundRobin and Random balacing algorithms with Session Persistence
