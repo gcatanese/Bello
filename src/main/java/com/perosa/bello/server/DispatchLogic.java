@@ -6,6 +6,9 @@ import io.undertow.server.handlers.RedirectHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class DispatchLogic {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DispatchLogic.class);
@@ -40,6 +43,7 @@ public class DispatchLogic {
         InRequest request = new InRequest();
         request.setHost(exchange.getHostName());
         request.setPayload(extractBody(exchange));
+        request.setHeaders(extractHeaders(exchange));
 
         return request;
     }
@@ -60,6 +64,17 @@ public class DispatchLogic {
         }
 
         return body;
+    }
+
+    Map<String, String> extractHeaders(HttpServerExchange exchange) {
+        Map<String, String> headers = new HashMap<>();
+
+        exchange.getRequestHeaders().getHeaderNames().stream()
+                .forEach(m -> headers.put(m.toString(),
+                        exchange.getRequestHeaders().get(m).getFirst()
+                ));
+
+        return headers;
     }
 
     public Balancer getBalancer() {
