@@ -29,7 +29,7 @@ class CoreBalancerTest {
     @Test
     void findTarget() {
 
-        when(channel.extract(isA(String.class))).thenReturn("s01");
+        when(channel.extract(isA(InRequest.class))).thenReturn("s01");
 
         InRequest request = new InRequest();
         request.setHost("localhost");
@@ -39,7 +39,7 @@ class CoreBalancerTest {
 
         assertNotNull(target);
         verify(sessionCache, times(1)).get(isA(String.class));
-        verify(channel, times(1)).extract(isA(String.class));
+        verify(channel, times(1)).extract(isA(InRequest.class));
         verify(sessionCache, times(1)).put(isA(String.class), isA(String.class));
 
     }
@@ -47,7 +47,7 @@ class CoreBalancerTest {
     @Test
     void findTargetWIthSessionIdNotAvail() {
 
-        when(channel.extract(isA(String.class))).thenReturn(null);
+        when(channel.extract(isA(InRequest.class))).thenReturn(null);
 
         InRequest request = new InRequest();
         request.setHost("localhost");
@@ -57,14 +57,14 @@ class CoreBalancerTest {
 
         assertNotNull(target);
         verify(sessionCache, times(0)).get(isA(String.class));
-        verify(channel, times(1)).extract(isA(String.class));
+        verify(channel, times(1)).extract(isA(InRequest.class));
 
     }
 
     @Test
     void extractSessionId() {
 
-        when(channel.extract(isA(String.class))).thenReturn("s01");
+        when(channel.extract(isA(InRequest.class))).thenReturn("s01");
 
         InRequest request = new InRequest();
         request.setHost("localhost");
@@ -74,7 +74,7 @@ class CoreBalancerTest {
 
         assertNotNull(sessionId);
         assertEquals("s01", sessionId);
-        verify(channel, times(1)).extract(isA(String.class));
+        verify(channel, times(1)).extract(isA(InRequest.class));
 
     }
 
