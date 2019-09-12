@@ -1,5 +1,7 @@
 package com.perosa.bello.core.resource.session;
 
+import com.perosa.bello.core.resource.session.provider.InMemSessionCache;
+
 public interface SessionCache {
 
     SessionInfo get(String sessionId);

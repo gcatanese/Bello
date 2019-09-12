@@ -1,5 +1,6 @@
-package com.perosa.bello.core.resource.session;
+package com.perosa.bello.core.resource.session.provider;
 
+import com.perosa.bello.core.resource.session.SessionInfo;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

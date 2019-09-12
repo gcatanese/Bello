@@ -1,4 +1,7 @@
-package com.perosa.bello.core.resource.session;
+package com.perosa.bello.core.resource.session.provider;
+
+import com.perosa.bello.core.resource.session.SessionCache;
+import com.perosa.bello.core.resource.session.SessionInfo;
 
 import java.util.HashMap;
 import java.util.Map;
