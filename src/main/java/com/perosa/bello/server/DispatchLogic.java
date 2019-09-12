@@ -69,10 +69,12 @@ public class DispatchLogic {
     Map<String, String> extractHeaders(HttpServerExchange exchange) {
         Map<String, String> headers = new HashMap<>();
 
-        exchange.getRequestHeaders().getHeaderNames().stream()
-                .forEach(m -> headers.put(m.toString(),
-                        exchange.getRequestHeaders().get(m).getFirst()
-                ));
+        if(exchange.getRequestHeaders() != null) {
+            exchange.getRequestHeaders().getHeaderNames().stream()
+                    .forEach(m -> headers.put(m.toString(),
+                            exchange.getRequestHeaders().get(m).getFirst()
+                    ));
+        }
 
         return headers;
     }
