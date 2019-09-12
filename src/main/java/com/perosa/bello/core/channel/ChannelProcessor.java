@@ -1,8 +1,6 @@
 package com.perosa.bello.core.channel;
 
-import com.perosa.bello.core.channel.platform.ChatfuelChannel;
-import com.perosa.bello.core.channel.platform.DialogFlowChannel;
-import com.perosa.bello.core.channel.platform.UnknownChannel;
+import com.perosa.bello.core.channel.platform.*;
 import com.perosa.bello.server.InRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,13 +17,37 @@ public class ChannelProcessor implements Channel {
     }
 
     Channel getChannel(InRequest request) {
-        if (request.getHeaders().containsValue("Google-Dialogflow")) {
-            return (DialogFlowChannel)this;
-        } else if (request.getHeaders().containsValue("Chatfuel")) {
-            return (ChatfuelChannel)this;
+        if (isDialogFlow(request)) {
+            return (DialogFlowChannel) this;
+        } else if (isChatfuel(request)) {
+            return (ChatfuelChannel) this;
+        } else if (isMsBot(request)) {
+            return (MsBotChannel) this;
+        } else if (isFacebook(request)) {
+            return (FacebookChannel) this;
         } else {
-            return (UnknownChannel)this;
+            return (UnknownChannel) this;
         }
+    }
+
+    boolean isDialogFlow(InRequest request) {
+        return request.getHeaders().containsValue("Google-Dialogflow");
+    }
+
+    boolean isChatfuel(InRequest request) {
+        return request.getHeaders().containsValue("Chatfuel");
+    }
+
+    boolean isMsBot(InRequest request) {
+        String header = request.getHeaders().get("user-agent");
+
+        return header != null && header.toLowerCase().contains("microsoft-botFramework");
+    }
+
+    boolean isFacebook(InRequest request) {
+        String header = request.getHeaders().get("user-agent");
+
+        return header != null && header.toLowerCase().contains("facebook");
     }
 
 }
