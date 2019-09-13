@@ -18,7 +18,7 @@ public class MsBotChannel extends ChannelProcessor implements Channel {
 
         String ret = null;
 
-        String session = JsonUtil.findElement("/session", request.getPayload());
+        String session = JsonUtil.findElement("/from/id", request.getPayload());
 
         if (session != null) {
             ret = session;
