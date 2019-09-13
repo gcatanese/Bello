@@ -18,8 +18,22 @@ public class Env {
             config = config + "/";
         }
 
-
         return config;
+    }
+
+    public int getPort() {
+        String port = System.getProperty("port");
+
+        if (port == null || port.isEmpty()) {
+            port = System.getenv("PORT");
+        }
+
+        if (port == null || port.isEmpty()) {
+            port = "8888";
+        }
+
+
+        return Integer.valueOf(port);
     }
 
 }

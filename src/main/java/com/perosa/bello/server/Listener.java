@@ -1,5 +1,6 @@
 package com.perosa.bello.server;
 
+import com.perosa.bello.core.config.Env;
 import io.undertow.Undertow;
 import io.undertow.server.HttpHandler;
 import io.undertow.server.HttpServerExchange;
@@ -53,10 +54,9 @@ public class Listener {
 
 
     }
-
-
+    
     public int getPort() {
-        return 8888;
+        return new Env().getPort();
     }
 
     public DispatchLogic getDispatchLogic() {
