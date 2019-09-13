@@ -4,6 +4,7 @@ import com.perosa.bello.core.config.Env;
 import io.undertow.Undertow;
 import io.undertow.server.HttpHandler;
 import io.undertow.server.HttpServerExchange;
+import io.undertow.util.Headers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -37,7 +38,11 @@ public class Listener {
                                 LOGGER.debug("exchange " + exchange);
 
                                 try {
-                                    getDispatchLogic().dispatch(exchange);
+                                    if(isTest(exchange)) {
+                                        sendReply(exchange);
+                                    } else {
+                                        getDispatchLogic().dispatch(exchange);
+                                    }
                                 } catch (Exception e) {
                                     exchange.setStatusCode(404);
                                 }
@@ -52,9 +57,18 @@ public class Listener {
             LOGGER.error(e.getMessage(), e);
         }
 
-
     }
-    
+
+    boolean isTest(HttpServerExchange exchange) {
+        return exchange.getRequestPath() != null && exchange.getRequestPath().endsWith("/belloadc/test");
+    }
+
+    void sendReply(HttpServerExchange exchange) {
+        exchange.setStatusCode(200);
+        exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/plain");
+        exchange.getResponseSender().send("Ok");
+    }
+
     public int getPort() {
         return new Env().getPort();
     }
