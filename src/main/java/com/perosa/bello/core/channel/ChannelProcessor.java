@@ -25,6 +25,8 @@ public class ChannelProcessor implements Channel {
             return (MsBotChannel) this;
         } else if (isFacebook(request)) {
             return (FacebookChannel) this;
+        } else if (isTelegram(request)) {
+            return (TelegramChannel) this;
         } else {
             return (UnknownChannel) this;
         }
@@ -46,6 +48,11 @@ public class ChannelProcessor implements Channel {
     boolean isFacebook(InRequest request) {
         String header = request.getHeaders().get("user-agent");
         return header != null && header.toLowerCase().contains("facebook");
+    }
+
+    boolean isTelegram(InRequest request) {
+        String header = request.getHeaders().get("user-agent");
+        return header != null && header.toLowerCase().contains("telegram");
     }
 
 }
