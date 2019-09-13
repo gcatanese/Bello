@@ -23,7 +23,6 @@ class DialogFlowChannelTest {
                 "    \"session\": \"projects/agent/sessions/001\"\n" +
                 "}";
 
-
         DialogFlowChannel channel = new DialogFlowChannel();
 
         InRequest request = new InRequest();
@@ -32,6 +31,4 @@ class DialogFlowChannelTest {
 
         assertEquals("projects/agent/sessions/001", channel.extract(request));
     }
-
-
 }

@@ -26,7 +26,6 @@ class TelegramChannelTest {
                 "}]\n" +
                 "}]";
 
-
         TelegramChannel channel = new TelegramChannel();
 
         InRequest request = new InRequest();
@@ -35,5 +34,4 @@ class TelegramChannelTest {
 
         assertEquals("123456", channel.extract(request));
     }
-
 }

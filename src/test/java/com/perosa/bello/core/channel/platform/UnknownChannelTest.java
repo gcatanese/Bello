@@ -16,7 +16,6 @@ class UnknownChannelTest {
                 "    \"source\": \"undefined\"\n" +
                 "}";
 
-
         UnknownChannel channel = new UnknownChannel();
 
         InRequest request = new InRequest();
@@ -25,6 +24,5 @@ class UnknownChannelTest {
 
         assertNull(channel.extract(request));
     }
-
 
 }

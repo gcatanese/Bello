@@ -18,7 +18,6 @@ class ChatfuelChannelTest {
                 " \"last clicked button name\": \"Sign Up\"\n" +
                 "}";
 
-
         ChatfuelChannel channel = new ChatfuelChannel();
 
         InRequest request = new InRequest();
@@ -27,6 +26,5 @@ class ChatfuelChannelTest {
 
         assertEquals("1545521221", channel.extract(request));
     }
-
 
 }
