@@ -18,17 +18,17 @@ public class ChannelProcessor implements Channel {
 
     Channel getChannel(InRequest request) {
         if (isDialogFlow(request)) {
-            return (DialogFlowChannel) this;
+            return new DialogFlowChannel();
         } else if (isChatfuel(request)) {
-            return (ChatfuelChannel) this;
+            return new ChatfuelChannel();
         } else if (isMsBot(request)) {
-            return (MsBotChannel) this;
+            return new MsBotChannel();
         } else if (isFacebook(request)) {
-            return (FacebookChannel) this;
+            return new FacebookChannel();
         } else if (isTelegram(request)) {
-            return (TelegramChannel) this;
+            return new TelegramChannel();
         } else {
-            return (UnknownChannel) this;
+            return new UnknownChannel();
         }
     }
 
@@ -42,7 +42,7 @@ public class ChannelProcessor implements Channel {
 
     boolean isMsBot(InRequest request) {
         String header = request.getHeaders().get("user-agent");
-        return header != null && header.toLowerCase().contains("microsoft-botFramework");
+        return header != null && header.toLowerCase().contains("microsoft-botframework");
     }
 
     boolean isFacebook(InRequest request) {
