@@ -24,7 +24,6 @@ public class DialogFlowChannel extends ChannelProcessor implements Channel {
             ret = session;
         }
 
-
         return ret;
     }
 

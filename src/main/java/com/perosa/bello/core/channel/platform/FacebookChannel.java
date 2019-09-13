@@ -24,7 +24,6 @@ public class FacebookChannel extends ChannelProcessor implements Channel {
             ret = id;
         }
 
-
         return ret;
     }
 
