@@ -76,8 +76,7 @@
 
     <build>
 
-        <finalName>bello</finalName>
-
+        <finalName>belloadc</finalName>
 
         <plugins>
 
