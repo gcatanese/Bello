@@ -13,7 +13,7 @@ public class InMemSessionThread {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(InMemSessionThread.class);
 
-    private static final long MAX_DURATION = 20;
+    private static final long MAX_DURATION = 15;
     private InMemSessionCache cache;
 
     public InMemSessionThread(InMemSessionCache cache) {
@@ -42,6 +42,9 @@ public class InMemSessionThread {
                 .filter(e -> e.getValue().getDate().isBefore(LocalDateTime.now().minusMinutes(MAX_DURATION)))
                 .forEach(e -> expired.add(e.getKey()));
 
-        cache.getMap().keySet().removeAll(expired);
+        if(!expired.isEmpty()) {
+            LOGGER.info("Discarding " + expired);
+            cache.getMap().keySet().removeAll(expired);
+        }
     }
 }
