@@ -11,6 +11,27 @@ In the Chatbots world user traffic goes via the selected platform (DialogFlow, C
 
 Bello is a lightweight ADC which distributes incoming Webhook traffic to the available hosts supporting ***RoundRobin*** with ***Session Persistence*** (sticky sessions), parsing the payload to fetch relevant user/session information.
 
+## Deploy 
+
+Run DockerImage providing the volume where to find the config folder.
+```
+docker login
+docker pull perosa/belloadc
+docker run -p 8080:8886 -v /config:/software/config perosa/Bello
+```
+
+Run from Java
+```
+java -jar target/belloadc.jar -Dport=8888 -Dconfig=perosa/config
+```
+
+## Config and usage
+
+* Customize config/hosts.json to define pool of hosts
+
+ Direct Webhooks request to https://{server}:8888, or better configure the ADC behind a production-ready HTTP Server (NGINX, Apache HTTP Server).
+
+
 ## Features... to date
 * RoundRobin and Random balacing algorithms with Session Persistence
 * Host healthcheck
