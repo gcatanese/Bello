@@ -1,5 +1,5 @@
 # Bello
-Advanced Delivery Controller (ADC) for Chatbots #adc #loadbalancer #webhook #crossplatform
+Advanced Delivery Controller (ADC) for Chatbots #adc #loadbalancer #chatbot #webhook #crossplatform
 
 ## Problem: where is my cookie?
 
