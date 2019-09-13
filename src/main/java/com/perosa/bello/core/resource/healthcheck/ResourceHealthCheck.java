@@ -44,7 +44,7 @@ public class ResourceHealthCheck {
         try {
             int responseCode = healthCheckClient.ping(getHealthCheckUrl(resourceHost));
 
-            LOGGER.debug("Ping " + getHealthCheckUrl(resourceHost) + " " + responseCode);
+            LOGGER.trace("Ping " + getHealthCheckUrl(resourceHost) + " " + responseCode);
 
             if (responseCode == 200) {
                 HostCache.setAsAvailable(resourceHost.getHost());
