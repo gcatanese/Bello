@@ -25,6 +25,8 @@ Run from Java
 java -jar target/belloadc.jar -Dport=8888 -Dconfig=perosa/config
 ```
 
+Verify with curl http://localhost:8888/belloadc/test
+
 ## Config and usage
 
 * Customize config/hosts.json to define pool of hosts
