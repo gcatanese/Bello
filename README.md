@@ -11,6 +11,11 @@ In the Chatbots world user traffic goes via the selected platform (DialogFlow, C
 
 Bello is a lightweight ADC which distributes incoming Webhook traffic to the available hosts supporting ***RoundRobin*** with ***Session Persistence*** (sticky sessions), parsing the payload to fetch relevant user/session information.
 
+## Use Cases
+* Load Balancing: distribute Chatbot webhook traffic ensuring ***Session Persistence***
+* Unload node: distribute Chatboot webhook traffic to other hosts so an host/service can redeploy or go offline 
+
+
 ## Deploy 
 
 Run DockerImage providing the volume where to find the config folder.
