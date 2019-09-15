@@ -15,13 +15,12 @@ public class ResourceHost {
     }
 
     public ResourceHost(String host, int available) {
-        this.host = host;
+        this(host);
         this.available = available;
     }
 
     public ResourceHost(String host, int available, int online) {
-        this.host = host;
-        this.available = available;
+        this(host, available);
         this.online = online;
     }
 
