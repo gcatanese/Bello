@@ -88,6 +88,20 @@ class CoreBalancerTest {
         hosts.add(new ResourceHost("localhost2"));
         hosts.add(new ResourceHost("localhost3", 0));
 
+        List<ResourceHost> list = new LocalCoreBalancer(sessionCache, channel).getAvailableHosts(hosts);
+
+        assertNotNull(list);
+        assertEquals(2, list.size());
+    }
+
+    @Test
+    void getAvailableHostsIgnoreOffline() {
+
+        List<ResourceHost> hosts = new ArrayList<>();
+
+        hosts.add(new ResourceHost("localhost1"));
+        hosts.add(new ResourceHost("localhost2"));
+        hosts.add(new ResourceHost("localhost3", 1, 0));
 
         List<ResourceHost> list = new LocalCoreBalancer(sessionCache, channel).getAvailableHosts(hosts);
 

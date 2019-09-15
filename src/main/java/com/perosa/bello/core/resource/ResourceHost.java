@@ -4,6 +4,7 @@ public class ResourceHost {
 
     private String host;
     private int available = 1;
+    private int online = 1;
     private String healthCheck;
 
     public ResourceHost() {
@@ -16,6 +17,12 @@ public class ResourceHost {
     public ResourceHost(String host, int available) {
         this.host = host;
         this.available = available;
+    }
+
+    public ResourceHost(String host, int available, int online) {
+        this.host = host;
+        this.available = available;
+        this.online = online;
     }
 
     public String getHost() {
@@ -46,11 +53,24 @@ public class ResourceHost {
         this.healthCheck = healthCheck;
     }
 
+    public int getOnline() {
+        return online;
+    }
+
+    public void setOnline(int online) {
+        this.online = online;
+    }
+
+    public boolean isOnline() {
+        return getOnline() == 1;
+    }
+
     @Override
     public String toString() {
         return "ResourceHost{" +
                 "host='" + host + '\'' +
                 ", available=" + available +
+                ", online=" + online +
                 '}';
     }
 }

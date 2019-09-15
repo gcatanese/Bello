@@ -49,6 +49,7 @@ public abstract class CoreBalancer implements Balancer {
     List<ResourceHost> getAvailableHosts(List<ResourceHost> list) {
         List<ResourceHost> hosts = list.stream()
                 .filter(h -> h.isAvailable())
+                .filter(h -> h.isOnline())
                 .collect(Collectors.toList());
 
         if (hosts.isEmpty()) {

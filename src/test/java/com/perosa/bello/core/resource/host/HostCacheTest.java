@@ -39,7 +39,7 @@ class HostCacheTest {
 
     @Test
     void getResourceHosts() {
-        assertNotNull(HostCache.getResourceHosts());
+        assertEquals(4, HostCache.getResourceHosts().size());
 
     }
 }
