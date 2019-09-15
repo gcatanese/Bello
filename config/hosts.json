@@ -2,16 +2,19 @@
   {
     "host": "host1.example.com",
     "available": "1",
+    "online": "1",
     "healthCheck": "/"
   },
   {
     "host": "host2.example.com",
     "available": "1",
+    "online": "1",
     "healthCheck": "/"
   },
   {
     "host": "host3.example.com",
     "available": "1",
+    "online": "1",
     "healthCheck": "/"
   }
 ]
