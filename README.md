@@ -51,5 +51,6 @@ Verify with curl http://localhost:8888/belloadc/test
 * Prometheus events
 * Alternative Cache solution to store Sessions and Hosts
 * Multi-path support
+* REST API
 
 
