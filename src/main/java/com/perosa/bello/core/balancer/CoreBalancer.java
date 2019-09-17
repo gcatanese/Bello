@@ -63,11 +63,11 @@ public abstract class CoreBalancer implements Balancer {
     }
 
     SessionInfo get(String sessionId) {
-        return sessionCache.get(sessionId);
+        return getSessionCache().get(sessionId);
     }
 
     void put(String sessionId, SessionInfo sessionInfo) {
-        sessionCache.put(sessionId, sessionInfo);
+        getSessionCache().put(sessionId, sessionInfo);
     }
 
 
