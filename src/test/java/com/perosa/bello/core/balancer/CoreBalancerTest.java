@@ -63,6 +63,26 @@ class CoreBalancerTest {
     }
 
     @Test
+    void findTargetFromCache() {
+
+        when(channel.extract(isA(InRequest.class))).thenReturn("s01");
+        when(sessionCache.get(eq("s01"))).thenReturn(new SessionInfo("s01", "myhost"));
+
+        InRequest request = new InRequest();
+        request.setHost("localhost");
+        request.setPayload("todo");
+
+        String target = new LocalCoreBalancer(sessionCache, channel).findTarget(request);
+
+        assertNotNull(target);
+        assertEquals("myhost", target);
+        verify(sessionCache, times(1)).get(isA(String.class));
+        verify(channel, times(1)).extract(isA(InRequest.class));
+        verify(sessionCache, times(1)).put(isA(String.class), isA(SessionInfo.class));
+
+    }
+
+    @Test
     void extractSessionId() {
 
         when(channel.extract(isA(InRequest.class))).thenReturn("s01");

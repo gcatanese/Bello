@@ -28,18 +28,21 @@ public abstract class CoreBalancer implements Balancer {
 
     public String findTarget(InRequest request) {
 
+        String target = null;
+
         String sessionId = extractSessionId(request);
 
         if (sessionId != null) {
             SessionInfo sessionInfo = get(sessionId);
             if (sessionInfo != null && sessionInfo.getHost() != null) {
-                return sessionInfo.getHost();
+                target = sessionInfo.getHost();
             }
         }
 
-        ResourceHost resourceHost = findNext(getAvailableHosts(HostCache.getResourceHosts()));
-
-        String target = resourceHost.getHost();
+        if(target == null) {
+            ResourceHost resourceHost = findNext(getAvailableHosts(HostCache.getResourceHosts()));
+            target = resourceHost.getHost();
+        }
 
         put(sessionId, new SessionInfo(sessionId, target));
 
