@@ -26,13 +26,17 @@ class ListenerTest {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ListenerTest.class);
 
-    Listener listener;
+    private Listener listener;
+    private LightRestClient lightRestClient;
+
 
     @Mock
     private DispatchLogic dispatchLogic;
 
     @BeforeEach
     private void init() {
+        lightRestClient = new LightRestClient();
+
         dispatchLogic = Mockito.mock(DispatchLogic.class);
         listener = new Listener(dispatchLogic);
 
@@ -41,20 +45,15 @@ class ListenerTest {
 
     @Test
     void test() throws Exception {
-        LightRestClient lightRestClient = new LightRestClient();
 
         ClientResponse clientResponse = lightRestClient.get("http://localhost:8888", "/belloadc/test", ClientResponse.class, new HashMap<String, String>());
-
         assertEquals(200, clientResponse.getResponseCode());
     }
 
     @Test
     void get() throws Exception {
 
-        LightRestClient lightRestClient = new LightRestClient();
-
         ClientResponse clientResponse = lightRestClient.get("http://localhost:8888", "/svc1", ClientResponse.class, new HashMap<String, String>());
-
         assertEquals(200, clientResponse.getResponseCode());
     }
 
