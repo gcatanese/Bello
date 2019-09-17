@@ -7,7 +7,8 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.isA;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class ResourceHealthCheckTest {
@@ -51,4 +52,18 @@ class ResourceHealthCheckTest {
 
         assertEquals("http://host.perosa.com/ping", resourceHealthCheck.getHealthCheckUrl(resourceHost));
     }
+
+    @Test
+    void runHealthCheck() throws Exception {
+
+        ResourceHealthCheck resourceHealthCheck = new ResourceHealthCheck(mock);
+        when(mock.ping(isA(String.class))).thenReturn(200);
+
+        resourceHealthCheck.runHealthCheck();
+
+        verify(mock, times(4)).ping(isA(String.class));
+
+    }
+
+
 }
