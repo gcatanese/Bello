@@ -41,7 +41,7 @@ Verify with curl http://localhost:8888/belloadc/test
 
 
 ## Features... to date
-* RoundRobin and Random balacing algorithms with Session Persistence
+* RoundRobin and Random balacing algorithms with ***Session Persistence***
 * Host healthcheck
 * Support for: DialogFlow, Chatfuel, Facebook, MS Bot
 * In-memory cache
