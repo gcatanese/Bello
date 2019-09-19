@@ -54,3 +54,9 @@ Verify with curl http://localhost:8888/belloadc/test
 * REST API
 
 
+&nbsp;&nbsp;&nbsp;
+<hr>
+<p align="center">
+Powered by NU IT http://www.nu-it.eu
+</p>
+
