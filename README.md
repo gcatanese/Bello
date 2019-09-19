@@ -14,6 +14,7 @@ Bello is a lightweight ADC which distributes incoming Webhook traffic to the ava
 ## Use Cases
 * Load Balancing: distribute Chatbot webhook traffic ensuring ***Session Persistence***
 * Unload node: distribute Chatboot webhook traffic to other hosts so an host/service can redeploy or go offline 
+* Blue-Green deployment: switch some traffic to a newly deployed host for assessing production readiness
 
 
 ## Deploy 
