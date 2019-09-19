@@ -46,6 +46,7 @@ Verify with curl http://localhost:8888/belloadc/test
 * In-memory cache
 
 ## In the pipeline
+* "Weighted RoundRobin" algorithm
 * "Least Load" distribution 
 * "Least Requests" distribution
 * Prometheus events
