@@ -68,7 +68,7 @@ public class HostDatastore {
         return json;
     }
 
-    private String getFilePath() {
+    String getFilePath() {
         return getEnv().getConfig() + "hosts.json";
     }
 
