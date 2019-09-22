@@ -7,6 +7,7 @@ public class InRequest {
     private String host;
     private String payload;
     private Map<String, String> headers;
+    Map<String, String[]> parameters;
 
     public String getHost() {
         return host;
@@ -30,5 +31,13 @@ public class InRequest {
 
     public void setHeaders(Map<String, String> headers) {
         this.headers = headers;
+    }
+
+    public Map<String, String[]> getParameters() {
+        return parameters;
+    }
+
+    public void setParameters(Map<String, String[]> parameters) {
+        this.parameters = parameters;
     }
 }

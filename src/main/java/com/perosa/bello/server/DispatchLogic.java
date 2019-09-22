@@ -44,6 +44,7 @@ public class DispatchLogic {
         request.setHost(exchange.getHostName());
         request.setPayload(extractBody(exchange));
         request.setHeaders(extractHeaders(exchange));
+        request.setParameters(extractParameters(exchange));
 
         return request;
     }
@@ -77,6 +78,18 @@ public class DispatchLogic {
         }
 
         return headers;
+    }
+
+    Map<String, String[]> extractParameters(HttpServerExchange exchange) {
+        Map<String, String[]> params = new HashMap<>();
+
+        exchange.getQueryParameters().entrySet()
+                .stream()
+                .forEach(m -> params.put(m.getKey(),
+                        m.getValue().toArray(new String[exchange.getQueryParameters().entrySet().size()])
+                ));
+
+        return params;
     }
 
     public Balancer getBalancer() {
