@@ -22,10 +22,10 @@ public class ChatfuelChannel extends ChannelProcessor implements Channel {
 
         String ret = null;
 
-        String id = JsonUtil.findElement("/" + ID, request.getPayload());
+        String id = extractFromParameters(request.getParameters());
 
-        if (!id.isEmpty()) {
-            ret = id;
+        if (id == null) {
+            ret = extractFromBody(request.getPayload());
         }
 
         return ret;
