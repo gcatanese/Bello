@@ -41,4 +41,16 @@ public class ChatfuelChannel extends ChannelProcessor implements Channel {
         return ret;
     }
 
+    String extractFromBody(String body) {
+        String ret = null;
+
+        String id = JsonUtil.findElement("/" + ID, body);
+
+        if (!id.isEmpty()) {
+            ret = id;
+        }
+
+        return ret;
+    }
+
 }

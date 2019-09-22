@@ -1,6 +1,5 @@
 package com.perosa.bello.core.channel.platform;
 
-import com.perosa.bello.server.InRequest;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
@@ -11,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class ChatfuelChannelTest {
 
     @Test
-    void extract() {
+    void extractFromBody() {
 
         String json = "{\n" +
                 " \"messenger user id\": \"1545521221\",\n" +
@@ -23,11 +22,7 @@ class ChatfuelChannelTest {
 
         ChatfuelChannel channel = new ChatfuelChannel();
 
-        InRequest request = new InRequest();
-        request.setHost("localhost");
-        request.setPayload(json);
-
-        assertEquals("1545521221", channel.extract(request));
+        assertEquals("1545521221", channel.extractFromBody(json));
     }
 
     @Test
