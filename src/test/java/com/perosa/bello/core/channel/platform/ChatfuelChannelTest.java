@@ -21,7 +21,6 @@ class ChatfuelChannelTest {
                 "}";
 
         ChatfuelChannel channel = new ChatfuelChannel();
-
         assertEquals("1545521221", channel.extractFromBody(json));
     }
 
@@ -34,9 +33,29 @@ class ChatfuelChannelTest {
         parameters.put("last name", new String[]{"Wiggle"});
 
         ChatfuelChannel channel = new ChatfuelChannel();
-
         assertEquals("1545521221", channel.extractFromParameters(parameters));
 
     }
+
+    @Test
+    void extractFromUrlInBody() {
+
+        String query = "messenger user id=1545521221&first name=John&last name=Wiggle";
+
+        ChatfuelChannel channel = new ChatfuelChannel();
+        assertEquals("1545521221", channel.extractFromEncodedUrlInBody(query));
+
+    }
+
+    @Test
+    void extractFromEncodedUrlInBody() {
+
+        String query = "messenger%20user%20id=1545521221&first%20name=John&last%20name=Wiggle";
+
+        ChatfuelChannel channel = new ChatfuelChannel();
+        assertEquals("1545521221", channel.extractFromEncodedUrlInBody(query));
+
+    }
+
 
 }
