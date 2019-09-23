@@ -39,7 +39,7 @@ public class ChatfuelChannel extends ChannelProcessor implements Channel {
     String extractFromParameters(Map<String, String[]> parameters) {
         String ret = null;
 
-        if (parameters.get(ID) != null) {
+        if (parameters != null && parameters.get(ID) != null) {
             ret = parameters.get(ID)[0];
         }
 
@@ -49,10 +49,12 @@ public class ChatfuelChannel extends ChannelProcessor implements Channel {
     String extractFromBody(String body) {
         String ret = null;
 
-        String id = JsonUtil.findElement("/" + ID, body);
+        if (body != null) {
+            String id = JsonUtil.findElement("/" + ID, body);
 
-        if (!id.isEmpty()) {
-            ret = id;
+            if (!id.isEmpty()) {
+                ret = id;
+            }
         }
 
         return ret;
@@ -61,17 +63,19 @@ public class ChatfuelChannel extends ChannelProcessor implements Channel {
     String extractFromEncodedUrlInBody(String body) {
         String ret = null;
 
-        body = body.replace("%20", " ");
+        if (body != null) {
+            body = body.replace("%20", " ");
 
-        String[] elements = body.split("&");
+            String[] elements = body.split("&");
 
-        Optional<String> element = Arrays.stream(elements)
-                .filter(e -> e.startsWith(ID))
-                .findFirst();
+            Optional<String> element = Arrays.stream(elements)
+                    .filter(e -> e.startsWith(ID))
+                    .findFirst();
 
-        if (element.isPresent()) {
-            String paramName = ID + "=";
-            ret = element.get().substring(paramName.length()).trim();
+            if (element.isPresent()) {
+                String paramName = ID + "=";
+                ret = element.get().substring(paramName.length()).trim();
+            }
         }
 
         return ret;
