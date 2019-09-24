@@ -3,24 +3,28 @@
     "host": "host1.perosa.com",
     "available": "1",
     "online": "1",
-    "healthCheck": "/"
+    "healthCheck": "/",
+    "weight":"70"
   },
   {
     "host": "host2.perosa.com",
     "available": "1",
     "online": "1",
-    "healthCheck": "/"
+    "healthCheck": "/",
+    "weight":"20"
   },
   {
     "host": "host3.perosa.com",
     "available": "0",
     "online": "1",
-    "healthCheck": "/"
+    "healthCheck": "/",
+    "weight":"10"
   },
   {
     "host": "host4.perosa.com",
     "available": "1",
     "online": "0",
-    "healthCheck": "/"
+    "healthCheck": "/",
+    "weight":"0"
   }
 ]

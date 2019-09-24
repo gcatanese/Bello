@@ -6,6 +6,7 @@ public class ResourceHost {
     private int available = 1;
     private int online = 1;
     private String healthCheck;
+    private int weight;
 
     public ResourceHost() {
     }
@@ -22,6 +23,11 @@ public class ResourceHost {
     public ResourceHost(String host, int available, int online) {
         this(host, available);
         this.online = online;
+    }
+
+    public ResourceHost(String host, int available, int online, int weight) {
+        this(host, available, online);
+        this.weight = weight;
     }
 
     public String getHost() {
@@ -64,12 +70,21 @@ public class ResourceHost {
         return getOnline() == 1;
     }
 
+    public int getWeight() {
+        return weight;
+    }
+
+    public void setWeight(int weight) {
+        this.weight = weight;
+    }
+
     @Override
     public String toString() {
         return "ResourceHost{" +
                 "host='" + host + '\'' +
                 ", available=" + available +
                 ", online=" + online +
+                ", weight=" + weight +
                 '}';
     }
 }
