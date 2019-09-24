@@ -41,13 +41,13 @@ Verify with curl http://localhost:8888/belloadc/test
 
 
 ## Features... to date
-* RoundRobin and Random balacing algorithms with ***Session Persistence***
+* Random, RoundRobin and Weighted RoundRobin balacing algorithms with ***Session Persistence***
 * Host healthcheck
 * Support for: DialogFlow, Chatfuel, Facebook, Microsoft Bot Framework, Telegram
 * In-memory cache
 
 ## In the pipeline
-* "Weighted RoundRobin" algorithm
+
 * "Least Load" distribution 
 * "Least Requests" distribution
 * Prometheus events
