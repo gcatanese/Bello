@@ -3,7 +3,7 @@ Advanced Delivery Controller (ADC) for Chatbots #adc #loadbalancer #chatbot #web
 
 ## Problem: where is my cookie?
 
-In the Chatbots world user traffic goes via the selected platform (DialogFlow, Chatfuel, Facebook, Telegram, MS Teams, ...) therefore the traditional load balancer model is no longer effective: users cannot be tracked with cookies or IP addresses, devices no longer provide the information you might need.
+In the Chatbots world user traffic goes via the selected platform (DialogFlow, Chatfuel, Facebook, Telegram, MS Teams, etc..) therefore the traditional load balancer model is no longer effective: users cannot be tracked with cookies or IP addresses, devices no longer provide the information you might need.
 
 ![Alt text](wiki/BT.png?raw=true "Title")
 
