@@ -9,7 +9,7 @@ In the Chatbots world user traffic goes via the selected platform (DialogFlow, C
 
 ## A Solution
 
-Bello is a lightweight ADC which distributes incoming Webhook traffic to the available hosts supporting ***RoundRobin*** with ***Session Persistence*** (sticky sessions) while parsing the payload to fetch relevant user/session information.
+Bello is a lightweight ADC which distributes incoming Webhook traffic to the available hosts supporting ***RoundRobin*** with ***Session Persistence*** (sticky sessions) while parsing the payload to obtain relevant user/session information.
 
 ## Use Cases
 * Load Balancing: distribute Chatbot webhook traffic ensuring ***Session Persistence***
