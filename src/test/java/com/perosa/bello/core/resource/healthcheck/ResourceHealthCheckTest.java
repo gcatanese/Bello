@@ -81,7 +81,7 @@ class ResourceHealthCheckTest {
 
         ResourceHealthCheck resourceHealthCheck = new ResourceHealthCheck(mock);
         ResourceHost resourceHost = new ResourceHost("host.perosa.com");
-        resourceHost.setHealtCheckScheme("https");
+        resourceHost.setHealthCheckScheme("https");
 
         String scheme = resourceHealthCheck.getHealthCheckScheme(resourceHost);
 
