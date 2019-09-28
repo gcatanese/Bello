@@ -40,7 +40,7 @@ public class Env {
         String interval = System.getProperty("healthCheckInterval");
 
         if (interval == null || interval.isEmpty()) {
-            interval = "2";
+            interval = "20";
         }
 
 

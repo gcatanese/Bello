@@ -1,5 +1,6 @@
 package com.perosa.bello.core.resource.healthcheck;
 
+import com.perosa.bello.core.config.Env;
 import com.perosa.bello.core.resource.ResourceHost;
 import com.perosa.bello.core.resource.host.HostCache;
 import org.slf4j.Logger;
@@ -13,15 +14,17 @@ public class ResourceHealthCheck {
     private static final Logger LOGGER = LoggerFactory.getLogger(ResourceHealthCheck.class);
 
     private HealthCheckClient healthCheckClient = null;
+    private Env env;
 
     public ResourceHealthCheck(HealthCheckClient healthCheckClient) {
         this.healthCheckClient = healthCheckClient;
+        this.env = new Env();
     }
 
     public void start() {
 
         Timer timer = new Timer("healthCheckThread");
-        final long INTERVAL = 1000L * 20;
+        final long INTERVAL = 1000L * getEnv().getHealthCheckInterval();
 
         TimerTask task = new TimerTask() {
             public void run() {
@@ -62,4 +65,11 @@ public class ResourceHealthCheck {
         return "http://" + resourceHost.getHost() + resourceHost.getHealthCheck();
     }
 
+    public Env getEnv() {
+        return env;
+    }
+
+    public void setEnv(Env env) {
+        this.env = env;
+    }
 }
