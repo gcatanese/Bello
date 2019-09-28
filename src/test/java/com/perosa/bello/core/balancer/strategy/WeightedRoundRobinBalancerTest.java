@@ -11,7 +11,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class WeightRoundRobinBalancerTest {
+class WeightedRoundRobinBalancerTest {
 
     @Mock
     SessionCache sessionCache;
@@ -22,13 +22,13 @@ class WeightRoundRobinBalancerTest {
     void findNext() {
         List<ResourceHost> hosts = new ArrayList<>();
 
-        LocalWeightRoundRobinBalancer weightRoundRobinBalancer = new LocalWeightRoundRobinBalancer(sessionCache, channel);
+        LocalWeightedRoundRobinBalancer rr = new LocalWeightedRoundRobinBalancer(sessionCache, channel);
 
         hosts.add(new ResourceHost("localhost1", 1, 1, 70));
         hosts.add(new ResourceHost("localhost2", 1, 1, 20));
         hosts.add(new ResourceHost("localhost3", 1, 1, 10));
 
-        ResourceHost resourceHost = weightRoundRobinBalancer.findNext(hosts);
+        ResourceHost resourceHost = rr.findNext(hosts);
 
         assertNotNull(resourceHost);
         assertEquals("localhost1", resourceHost.getHost());
@@ -43,23 +43,23 @@ class WeightRoundRobinBalancerTest {
         hosts.add(new ResourceHost("localhost3", 1, 1, 10));
 
 
-        LocalWeightRoundRobinBalancer weightRoundRobinBalancer = new LocalWeightRoundRobinBalancer(sessionCache, channel);
+        LocalWeightedRoundRobinBalancer rr = new LocalWeightedRoundRobinBalancer(sessionCache, channel);
 
-        assertNotNull(weightRoundRobinBalancer.getBucket(hosts));
-        assertEquals(100, weightRoundRobinBalancer.getBucket(hosts).size());
+        assertNotNull(rr.getBucket(hosts));
+        assertEquals(100, rr.getBucket(hosts).size());
 
     }
 
     @Test
     void getHostEntries() {
-        LocalWeightRoundRobinBalancer weightRoundRobinBalancer = new LocalWeightRoundRobinBalancer(sessionCache, channel);
+        LocalWeightedRoundRobinBalancer rr = new LocalWeightedRoundRobinBalancer(sessionCache, channel);
 
-        assertEquals(45, weightRoundRobinBalancer.getHostEntries(new ResourceHost("localhost"), 45).size());
+        assertEquals(45, rr.getHostEntries(new ResourceHost("localhost"), 45).size());
     }
 }
 
-class LocalWeightRoundRobinBalancer extends WeightRoundRobinBalancer {
-    LocalWeightRoundRobinBalancer(SessionCache sessionCache, Channel channel) {
+class LocalWeightedRoundRobinBalancer extends WeightedRoundRobinBalancer {
+    LocalWeightedRoundRobinBalancer(SessionCache sessionCache, Channel channel) {
         super(sessionCache, channel);
     }
 

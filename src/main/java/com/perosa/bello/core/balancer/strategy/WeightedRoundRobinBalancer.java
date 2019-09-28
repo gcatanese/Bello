@@ -12,11 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class WeightRoundRobinBalancer extends CoreBalancer implements Balancer {
+public class WeightedRoundRobinBalancer extends CoreBalancer implements Balancer {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(WeightRoundRobinBalancer.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(WeightedRoundRobinBalancer.class);
 
-    public WeightRoundRobinBalancer(SessionCache sessionCache, Channel channel) {
+    public WeightedRoundRobinBalancer(SessionCache sessionCache, Channel channel) {
         super(sessionCache, channel);
     }
 
