@@ -65,5 +65,26 @@ class ResourceHealthCheckTest {
 
     }
 
+    @Test
+    void getHealthCheckHttpScheme() throws Exception {
 
+        ResourceHealthCheck resourceHealthCheck = new ResourceHealthCheck(mock);
+        ResourceHost resourceHost = new ResourceHost("host.perosa.com");
+
+        String scheme = resourceHealthCheck.getHealthCheckScheme(resourceHost);
+
+        assertEquals("http", scheme);
+    }
+
+    @Test
+    void getHealthCheckHttpsScheme() throws Exception {
+
+        ResourceHealthCheck resourceHealthCheck = new ResourceHealthCheck(mock);
+        ResourceHost resourceHost = new ResourceHost("host.perosa.com");
+        resourceHost.setHealtCheckScheme("https");
+
+        String scheme = resourceHealthCheck.getHealthCheckScheme(resourceHost);
+
+        assertEquals("https", scheme);
+    }
 }

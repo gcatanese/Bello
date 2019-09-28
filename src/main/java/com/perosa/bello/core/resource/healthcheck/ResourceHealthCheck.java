@@ -62,7 +62,11 @@ public class ResourceHealthCheck {
     }
 
     String getHealthCheckUrl(ResourceHost resourceHost) {
-        return "http://" + resourceHost.getHost() + resourceHost.getHealthCheck();
+        return getHealthCheckScheme(resourceHost) + "://" + resourceHost.getHost() + resourceHost.getHealthCheck();
+    }
+
+    String getHealthCheckScheme(ResourceHost resourceHost) {
+        return (resourceHost.getHealtCheckScheme() == null ? "http" : resourceHost.getHealtCheckScheme());
     }
 
     public Env getEnv() {

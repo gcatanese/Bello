@@ -7,6 +7,7 @@ public class ResourceHost {
     private int online = 1;
     private String healthCheck;
     private int weight;
+    private String healtCheckScheme;
 
     public ResourceHost() {
     }
@@ -76,6 +77,14 @@ public class ResourceHost {
 
     public void setWeight(int weight) {
         this.weight = weight;
+    }
+
+    public String getHealtCheckScheme() {
+        return healtCheckScheme;
+    }
+
+    public void setHealtCheckScheme(String healtCheckScheme) {
+        this.healtCheckScheme = healtCheckScheme;
     }
 
     @Override

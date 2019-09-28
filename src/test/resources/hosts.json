@@ -25,6 +25,7 @@
     "available": "1",
     "online": "0",
     "healthCheck": "/",
+    "healthCheckScheme": "https",
     "weight":"0"
   }
 ]
