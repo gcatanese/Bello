@@ -1,5 +1,6 @@
 package com.perosa.bello.core.resource.healthcheck;
 
+import com.perosa.bello.core.config.Env;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,6 +12,12 @@ import java.net.URL;
 public class HealthCheckClient {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(HealthCheckClient.class);
+
+    private Env env;
+
+    public HealthCheckClient() {
+        this.env = new Env();
+    }
 
     public int ping(String endpoint) throws Exception {
         
@@ -29,7 +36,7 @@ public class HealthCheckClient {
             }
             //  Set connection properties
             connection.setRequestMethod("GET");
-            connection.setReadTimeout(2 * 1000);
+            connection.setReadTimeout(getEnv().getHealthCheckInterval() * 1000);
             connection.setUseCaches(false);
 
             responseCode = connection.getResponseCode();
@@ -46,4 +53,11 @@ public class HealthCheckClient {
         return responseCode;
     }
 
+    public Env getEnv() {
+        return env;
+    }
+
+    public void setEnv(Env env) {
+        this.env = env;
+    }
 }

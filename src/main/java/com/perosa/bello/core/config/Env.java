@@ -36,4 +36,15 @@ public class Env {
         return Integer.valueOf(port);
     }
 
+    public int getHealthCheckInterval() {
+        String interval = System.getProperty("healthCheckInterval");
+
+        if (interval == null || interval.isEmpty()) {
+            interval = "2";
+        }
+
+
+        return Integer.valueOf(interval);
+    }
+
 }
