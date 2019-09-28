@@ -47,4 +47,14 @@ public class Env {
         return Integer.valueOf(interval);
     }
 
+    public String getStrategy() {
+        String strategy = System.getProperty("strategy");
+
+        if (strategy == null || strategy.isEmpty()) {
+            strategy = "roundrobin";
+        }
+
+        return strategy;
+    }
+
 }
