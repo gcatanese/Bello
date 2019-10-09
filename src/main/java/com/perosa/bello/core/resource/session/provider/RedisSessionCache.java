@@ -57,7 +57,7 @@ public class RedisSessionCache implements SessionCache {
     }
 
     LocalDateTime writeToLocalDateTime(String string) {
-        return LocalDateTime.parse(string);
+        return (string != null ? LocalDateTime.parse(string) : null);
     }
 
     public Env getEnv() {
