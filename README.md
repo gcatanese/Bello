@@ -41,6 +41,7 @@ Verify with curl http://localhost:8888/belloadc/test
 
 
 ## Features... to date
+* ***Simple***: single Docker image without external dependencies
 * Random, RoundRobin and Weighted RoundRobin balacing algorithms with ***Session Persistence***
 * Host healthcheck
 * Support for: DialogFlow, Chatfuel, Facebook, Microsoft Bot Framework, Telegram
