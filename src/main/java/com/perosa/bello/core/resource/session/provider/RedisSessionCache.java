@@ -17,11 +17,11 @@ public class RedisSessionCache implements SessionCache {
 
     private Env env;
 
-    Jedis jedis;
+    private Jedis jedis;
 
-    public RedisSessionCache() {
+    public RedisSessionCache(Jedis jedis) {
         this.env = new Env();
-        this.jedis = new Jedis(getEnv().getRedisHost());
+        this.jedis = jedis;
     }
 
     @Override
@@ -31,6 +31,8 @@ public class RedisSessionCache implements SessionCache {
         String id = getJedis().hget(sessionId, "id");
 
         if(id != null) {
+            sessionInfo = new SessionInfo();
+
             sessionInfo.setId(id);
             sessionInfo.setHost(getJedis().hget(sessionId, "host"));
             sessionInfo.setDate(writeToLocalDateTime(getJedis().hget(sessionId, "date")));
@@ -51,7 +53,7 @@ public class RedisSessionCache implements SessionCache {
     }
 
     String writeToString(LocalDateTime localDateTime) {
-        return localDateTime.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+        return (localDateTime != null ? localDateTime.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME) : "");
     }
 
     LocalDateTime writeToLocalDateTime(String string) {
