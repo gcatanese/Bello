@@ -1,40 +1,79 @@
 package com.perosa.bello.core.resource.session.provider;
 
+import com.perosa.bello.core.config.Env;
 import com.perosa.bello.core.resource.session.SessionCache;
 import com.perosa.bello.core.resource.session.SessionInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import redis.clients.jedis.Jedis;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.time.LocalDateTime;
+
 
 public class RedisSessionCache implements SessionCache {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RedisSessionCache.class);
 
-    static Map<String, SessionInfo> map = new HashMap<>();
+    private Env env;
+
     Jedis jedis = null;
 
     public RedisSessionCache() {
-        this.jedis = new Jedis("localhost");
-
-        LOGGER.info(jedis.toString());
+        this.env = new Env();
+        this.jedis = new Jedis(getEnv().getRedisHost());
     }
 
     @Override
     public SessionInfo get(String sessionId) {
-        return map.get(sessionId);
+        SessionInfo sessionInfo = null;
+
+        String id = getJedis().hget(sessionId, "id");
+
+        if(id != null) {
+            sessionInfo.setId(id);
+            sessionInfo.setHost(getJedis().hget(sessionId, "host"));
+            sessionInfo.setDate(writeToLocalDateTime(getJedis().hget(sessionId, "date")));
+            sessionInfo.setAgent(getJedis().hget(sessionId, "agent"));
+        }
+
+        return sessionInfo;
     }
 
     @Override
     public void put(String sessionId, SessionInfo sessionInfo) {
-        if(sessionId != null) {
-            jedis.set(sessionId, sessionInfo.getHost());
+        if (sessionId != null) {
+            getJedis().hset(sessionId, "id", sessionInfo.getId());
+            getJedis().hset(sessionId, "host", sessionInfo.getHost());
+            getJedis().hset(sessionId, "date", writeToString(sessionInfo.getDate()));
+            getJedis().hset(sessionId, "agent", sessionInfo.getAgent());
         }
     }
 
-    Map<String, SessionInfo> getMap() {
-        return map;
+    String writeToString(LocalDateTime localDateTime) {
+        String s = null;
+
+        return s;
+    }
+
+    LocalDateTime writeToLocalDateTime(String string) {
+        LocalDateTime s = null;
+
+        return s;
+    }
+
+    public Env getEnv() {
+        return env;
+    }
+
+    public void setEnv(Env env) {
+        this.env = env;
+    }
+
+    public Jedis getJedis() {
+        return jedis;
+    }
+
+    public void setJedis(Jedis jedis) {
+        this.jedis = jedis;
     }
 }
