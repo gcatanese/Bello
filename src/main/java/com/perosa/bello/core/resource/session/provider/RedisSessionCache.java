@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import redis.clients.jedis.Jedis;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 
 public class RedisSessionCache implements SessionCache {
@@ -50,15 +51,11 @@ public class RedisSessionCache implements SessionCache {
     }
 
     String writeToString(LocalDateTime localDateTime) {
-        String s = null;
-
-        return s;
+        return localDateTime.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
     }
 
     LocalDateTime writeToLocalDateTime(String string) {
-        LocalDateTime s = null;
-
-        return s;
+        return LocalDateTime.parse(string);
     }
 
     public Env getEnv() {
