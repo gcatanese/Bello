@@ -13,7 +13,10 @@ public class Gauges {
             .help("Number of User Sessions in cache")
             .register();
 
-    public void setTotalUserSessions(int val) {
+
+    void setTotalUserSessions(int val) {
         totalUserSessions.set(val);
     }
+
+
 }

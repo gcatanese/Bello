@@ -26,6 +26,11 @@ public class InMemSessionCache implements SessionCache {
         }
     }
 
+    @Override
+    public int size() {
+        return map.size();
+    }
+
     Map<String, SessionInfo> getMap() {
         return map;
     }
