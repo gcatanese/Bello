@@ -57,6 +57,16 @@ public class Env {
         return strategy;
     }
 
+    public String getCacheImpl() {
+        String cache = System.getProperty("cacheImpl");
+
+        if (cache == null || cache.isEmpty()) {
+            cache = "inMemory";
+        }
+
+        return cache;
+    }
+
     public String getRedisHost() {
         String host = System.getProperty("redisHost");
 
