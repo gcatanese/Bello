@@ -13,8 +13,12 @@ public interface SessionCache {
 
     static SessionCache make() {
 
-        if(new Env().getCacheImpl().equalsIgnoreCase("redis")) {
-            return new RedisSessionCache(new Jedis(new Env().getRedisHost()));
+        String cacheImpl = new Env().getCacheImpl();
+        String redisHost = new Env().getRedisHost();
+        int redisPort = new Env().getRedisPort();
+
+        if(cacheImpl.equalsIgnoreCase("redis")) {
+            return new RedisSessionCache(new Jedis(redisHost, redisPort ));
         } else {
             return new InMemSessionCache();
         }

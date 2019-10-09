@@ -77,4 +77,14 @@ public class Env {
         return host;
     }
 
+    public int getRedisPort() {
+        String port = System.getProperty("redisPort");
+
+        if (port == null || port.isEmpty()) {
+            port = "6379";
+        }
+
+        return Integer.valueOf(port);
+    }
+
 }
