@@ -12,8 +12,8 @@ import redis.clients.jedis.Jedis;
 import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
 import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class RedisSessionCacheTest {
@@ -35,6 +35,39 @@ class RedisSessionCacheTest {
         assertNotNull(sessionInfo);
         assertEquals("01", sessionInfo.getId());
         assertEquals("localhost", sessionInfo.getHost());
+
+        verify(jedis, times(4)).hget(isA(String.class), isA(String.class));
+
+    }
+
+    @Test
+    void getNotFound() {
+
+        RedisSessionCache redisSessionCache = new RedisSessionCache(jedis);
+        when(jedis.hget(eq("s02"), eq("id"))).thenReturn(null);
+
+        SessionInfo sessionInfo = redisSessionCache.get("s02");
+
+        assertNull(sessionInfo);
+
+        verify(jedis, times(1)).hget(isA(String.class), isA(String.class));
+
+    }
+
+    @Test
+    void put() {
+
+        RedisSessionCache redisSessionCache = new RedisSessionCache(jedis);
+
+        SessionInfo sessionInfo = new SessionInfo();
+        sessionInfo.setId("s01");
+        sessionInfo.setHost("localhost");
+        sessionInfo.setDate(LocalDateTime.now());
+        sessionInfo.setAgent("Telegram");
+
+        redisSessionCache.put("s01", sessionInfo);
+
+        verify(jedis, times(4)).hset(isA(String.class), isA(String.class), isA(String.class));
     }
 
     @Test
