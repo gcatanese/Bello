@@ -17,8 +17,8 @@ public interface SessionCache {
         String redisHost = new Env().getRedisHost();
         int redisPort = new Env().getRedisPort();
 
-        if(cacheImpl.equalsIgnoreCase("redis")) {
-            return new RedisSessionCache(new Jedis(redisHost, redisPort ));
+        if (cacheImpl.equalsIgnoreCase("redis")) {
+            return new RedisSessionCache(new Jedis(redisHost, redisPort));
         } else {
             return new InMemSessionCache();
         }

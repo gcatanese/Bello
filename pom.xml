@@ -51,7 +51,6 @@
             <artifactId>jedis</artifactId>
             <version>3.1.0</version>
             <type>jar</type>
-            <scope>compile</scope>
         </dependency>
 
         <!-- Testing -->
