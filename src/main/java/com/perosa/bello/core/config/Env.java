@@ -57,4 +57,14 @@ public class Env {
         return strategy;
     }
 
+    public String getRedisHost() {
+        String host = System.getProperty("redisHost");
+
+        if (host == null || host.isEmpty()) {
+            host = "localhost";
+        }
+
+        return host;
+    }
+
 }
