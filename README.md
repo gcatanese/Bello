@@ -51,7 +51,7 @@ Verify with curl http://localhost:8888/belloadc/test
 * "Least Load" distribution 
 * "Least Requests" distribution
 * Prometheus events
-* Alternative Cache solution to store Sessions and Hosts
+* Alternative Cache solution to store Sessions info
 * Multi-path support
 * REST API
 
