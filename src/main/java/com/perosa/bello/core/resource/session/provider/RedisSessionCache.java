@@ -17,7 +17,7 @@ public class RedisSessionCache implements SessionCache {
 
     private Env env;
 
-    Jedis jedis = null;
+    Jedis jedis;
 
     public RedisSessionCache() {
         this.env = new Env();
