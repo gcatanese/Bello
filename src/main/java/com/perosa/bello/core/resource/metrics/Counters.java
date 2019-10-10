@@ -8,7 +8,7 @@ public class Counters {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Counters.class);
 
-    static Counter totalRequests =  Counter.build()
+    static Counter totalRequests = Counter.build()
             .name("belloadc_total_requests")
             .help("Total requests")
             .labelNames("host")

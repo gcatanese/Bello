@@ -18,5 +18,4 @@ public class Gauges {
         totalUserSessions.set(val);
     }
 
-
 }

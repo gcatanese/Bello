@@ -16,7 +16,7 @@ public class SessionTrackerThread {
     public void startTracking() {
 
         Timer timer = new Timer("sessionTrackerThread");
-        final long INTERVAL = 1000L * 60 * 5;
+        final long INTERVAL = 1000L * 60 * 1;
 
         TimerTask task = new TimerTask() {
             public void run() {
@@ -27,7 +27,6 @@ public class SessionTrackerThread {
         timer.schedule(task, 5000L, INTERVAL);
 
     }
-
 
     private void setValue() {
         gauges.setTotalUserSessions(SessionCache.make().size());

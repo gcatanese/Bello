@@ -44,6 +44,7 @@ public class RedisSessionCache implements SessionCache {
 
     @Override
     public void put(String sessionId, SessionInfo sessionInfo) {
+
         if (sessionId != null) {
             getJedis().hset(sessionId, "id", sessionInfo.getId());
             getJedis().hset(sessionId, "host", sessionInfo.getHost());

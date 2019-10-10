@@ -31,7 +31,7 @@ public class JsonUtil {
             }
         }
 
-        LOGGER.debug(path + "-->" + ret);
+        LOGGER.trace(path + "-->" + ret);
 
         return ret;
     }
