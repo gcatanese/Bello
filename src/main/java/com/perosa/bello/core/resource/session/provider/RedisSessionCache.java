@@ -54,6 +54,11 @@ public class RedisSessionCache implements SessionCache {
         }
     }
 
+    @Override
+    public int size() {
+        return getJedis().keys("*").size();
+    }
+
     String writeToString(LocalDateTime localDateTime) {
         return (localDateTime != null ? localDateTime.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME) : "");
     }

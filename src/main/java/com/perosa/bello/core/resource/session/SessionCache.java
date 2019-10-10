@@ -11,6 +11,8 @@ public interface SessionCache {
 
     void put(String sessionId, SessionInfo sessionInfo);
 
+    int size();
+
     static SessionCache make() {
 
         String cacheImpl = new Env().getCacheImpl();

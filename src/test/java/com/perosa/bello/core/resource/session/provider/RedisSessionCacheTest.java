@@ -72,6 +72,14 @@ class RedisSessionCacheTest {
     }
 
     @Test
+    void size() {
+
+        RedisSessionCache redisSessionCache = new RedisSessionCache(jedis);
+
+        verify(jedis, times(1)).keys(isA(String.class));
+    }
+
+    @Test
     void writeToString() {
         RedisSessionCache redisSessionCache = new RedisSessionCache(jedis);
 
