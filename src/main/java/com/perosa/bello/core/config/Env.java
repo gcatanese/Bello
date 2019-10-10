@@ -87,4 +87,13 @@ public class Env {
         return Integer.valueOf(port);
     }
 
+    @Override
+    public String toString() {
+        return "conf[" +
+                "config:" + getConfig() +
+                ",port:" + getPort() +
+                ",strategy:" + getStrategy() +
+                ",cacheImpl:" + getCacheImpl() +
+                "]";
+    }
 }

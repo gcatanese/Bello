@@ -1,6 +1,7 @@
 package com.perosa.bello;
 
 import com.perosa.bello.core.balancer.Balancer;
+import com.perosa.bello.core.config.Env;
 import com.perosa.bello.core.resource.healthcheck.HealthCheckClient;
 import com.perosa.bello.core.resource.healthcheck.ResourceHealthCheck;
 import com.perosa.bello.core.resource.metrics.Gauges;
@@ -25,6 +26,6 @@ public class BalancerApp {
 
         DefaultExports.initialize();
 
-        LOGGER.info("Bello is up!");
+        LOGGER.info("Bello is up! (" + new Env() + ")");
     }
 }
