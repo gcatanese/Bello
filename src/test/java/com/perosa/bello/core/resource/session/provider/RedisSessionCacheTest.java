@@ -76,6 +76,8 @@ class RedisSessionCacheTest {
 
         RedisSessionCache redisSessionCache = new RedisSessionCache(jedis);
 
+        int i = redisSessionCache.size();
+
         verify(jedis, times(1)).keys(isA(String.class));
     }
 
