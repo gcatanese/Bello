@@ -45,14 +45,13 @@ Verify with curl http://localhost:8888/belloadc/test
 * Random, RoundRobin and Weighted RoundRobin balacing algorithms with ***Session Persistence***
 * Host healthcheck
 * Support for: DialogFlow, Chatfuel, Facebook, Microsoft Bot Framework, Telegram
-* In-memory cache
+* In-memory cache and Redis support
 
 ## In the pipeline
 
 * "Least Load" distribution 
 * "Least Requests" distribution
 * Prometheus events
-* Alternative Cache solution to store Sessions info
 * Multi-path support
 * REST API
 
