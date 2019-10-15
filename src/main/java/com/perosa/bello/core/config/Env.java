@@ -87,11 +87,22 @@ public class Env {
         return Integer.valueOf(port);
     }
 
+    public int getMetricsHandlerPort() {
+        String port = System.getProperty("metricsHandlerPort");
+
+        if (port == null || port.isEmpty()) {
+            port = "8889";
+        }
+
+        return Integer.valueOf(port);
+    }
+
     @Override
     public String toString() {
         return "conf[" +
                 "config:" + getConfig() +
                 ",port:" + getPort() +
+                ",metricsHandlerPort:" + getMetricsHandlerPort() +
                 ",strategy:" + getStrategy() +
                 ",cacheImpl:" + getCacheImpl() +
                 "]";
