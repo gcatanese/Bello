@@ -4,8 +4,8 @@ import com.perosa.bello.core.balancer.Balancer;
 import com.perosa.bello.core.config.Env;
 import com.perosa.bello.core.resource.healthcheck.HealthCheckClient;
 import com.perosa.bello.core.resource.healthcheck.ResourceHealthCheck;
-import com.perosa.bello.core.resource.metrics.Gauges;
 import com.perosa.bello.core.resource.metrics.SessionTrackerThread;
+import com.perosa.bello.core.util.TerminationManager;
 import com.perosa.bello.server.DispatchLogic;
 import com.perosa.bello.server.Listener;
 import io.prometheus.client.hotspot.DefaultExports;
@@ -26,6 +26,10 @@ public class BalancerApp {
 
         DefaultExports.initialize();
 
+        Runtime.getRuntime().addShutdownHook(new TerminationManager());
+
         LOGGER.info("Bello is up! (" + new Env() + ")");
     }
+
+
 }
