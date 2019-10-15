@@ -1,6 +1,7 @@
 package com.perosa.bello.server;
 
 import com.perosa.bello.core.balancer.Balancer;
+import com.perosa.bello.core.channel.ChannelInspector;
 import io.undertow.server.HttpServerExchange;
 import io.undertow.server.handlers.RedirectHandler;
 import org.slf4j.Logger;
@@ -45,6 +46,8 @@ public class DispatchLogic {
         request.setPayload(extractBody(exchange));
         request.setHeaders(extractHeaders(exchange));
         request.setParameters(extractParameters(exchange));
+
+        request.setChannel(new ChannelInspector().getChannel(request));
 
         return request;
     }

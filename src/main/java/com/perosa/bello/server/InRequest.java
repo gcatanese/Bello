@@ -8,6 +8,7 @@ public class InRequest {
     private String payload;
     private Map<String, String> headers;
     Map<String, String[]> parameters;
+    private String channel;
 
     public String getHost() {
         return host;
@@ -39,5 +40,13 @@ public class InRequest {
 
     public void setParameters(Map<String, String[]> parameters) {
         this.parameters = parameters;
+    }
+
+    public String getChannel() {
+        return channel;
+    }
+
+    public void setChannel(String channel) {
+        this.channel = channel;
     }
 }

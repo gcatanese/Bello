@@ -9,6 +9,8 @@ public class ChannelProcessor implements Channel {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ChannelProcessor.class);
 
+    private ChannelInspector channelInspector = new ChannelInspector();
+
     public ChannelProcessor() {
     }
 
@@ -17,42 +19,27 @@ public class ChannelProcessor implements Channel {
     }
 
     Channel getChannel(InRequest request) {
-        if (isDialogFlow(request)) {
+        if (getChannelInspector().isDialogFlow(request)) {
             return new DialogFlowChannel();
-        } else if (isChatfuel(request)) {
+        } else if (getChannelInspector().isChatfuel(request)) {
             return new ChatfuelChannel();
-        } else if (isMsBot(request)) {
+        } else if (getChannelInspector().isMsBot(request)) {
             return new MsBotChannel();
-        } else if (isFacebook(request)) {
+        } else if (getChannelInspector().isFacebook(request)) {
             return new FacebookChannel();
-        } else if (isTelegram(request)) {
+        } else if (getChannelInspector().isTelegram(request)) {
             return new TelegramChannel();
         } else {
             return new UnknownChannel();
         }
     }
 
-    boolean isDialogFlow(InRequest request) {
-        return request.getHeaders().containsValue("Google-Dialogflow");
+
+    public ChannelInspector getChannelInspector() {
+        return channelInspector;
     }
 
-    boolean isChatfuel(InRequest request) {
-        return request.getHeaders().containsValue("Chatfuel");
+    public void setChannelInspector(ChannelInspector channelInspector) {
+        this.channelInspector = channelInspector;
     }
-
-    boolean isMsBot(InRequest request) {
-        String header = request.getHeaders().get("user-agent");
-        return header != null && header.toLowerCase().contains("microsoft-botframework");
-    }
-
-    boolean isFacebook(InRequest request) {
-        String header = request.getHeaders().get("user-agent");
-        return header != null && header.toLowerCase().contains("facebook");
-    }
-
-    boolean isTelegram(InRequest request) {
-        String header = request.getHeaders().get("user-agent");
-        return header != null && header.toLowerCase().contains("telegram");
-    }
-
 }
