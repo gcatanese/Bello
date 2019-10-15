@@ -21,11 +21,15 @@ public class Counters {
             .register();
 
     public void incTotalRequestsByHost(String host) {
-        totalRequestsByHost.labels(sanitize(host)).inc();
+        if(host != null) {
+            totalRequestsByHost.labels(sanitize(host)).inc();
+        }
     }
 
     public void incTotalRequestsByChannel(String channel) {
-        totalRequestsByChannel.labels(channel).inc();
+        if(channel != null) {
+            totalRequestsByChannel.labels(channel).inc();
+        }
     }
 
     String sanitize(String host) {
