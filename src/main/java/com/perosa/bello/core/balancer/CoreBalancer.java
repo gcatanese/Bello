@@ -32,6 +32,7 @@ public abstract class CoreBalancer implements Balancer {
         String target = null;
 
         String sessionId = extractSessionId(request);
+        String channel = request.getChannel();
 
         if (sessionId != null) {
             SessionInfo sessionInfo = get(sessionId);
@@ -46,10 +47,10 @@ public abstract class CoreBalancer implements Balancer {
 
         }
 
-        put(sessionId, new SessionInfo(sessionId, target));
+        put(sessionId, new SessionInfo(sessionId, target, channel));
 
         new Counters().incTotalRequestsByHost(target);
-        new Counters().incTotalRequestsByChannel(request.getChannel());
+        new Counters().incTotalRequestsByChannel(channel);
 
         return target;
     }
