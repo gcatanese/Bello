@@ -8,14 +8,24 @@ public class Counters {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Counters.class);
 
-    static Counter totalRequests = Counter.build()
-            .name("belloadc_total_requests")
-            .help("Total requests")
+    static Counter totalRequestsByHost = Counter.build()
+            .name("belloadc_total_requests_by_host")
+            .help("Total requests by Host")
             .labelNames("host")
             .register();
 
-    public void incTotalRequests(String host) {
-        totalRequests.labels(sanitize(host)).inc();
+    static Counter totalRequestsByChannel = Counter.build()
+            .name("belloadc_total_requests_by_channel")
+            .help("Total requests by Channel")
+            .labelNames("channel")
+            .register();
+
+    public void incTotalRequestsByHost(String host) {
+        totalRequestsByHost.labels(sanitize(host)).inc();
+    }
+
+    public void incTotalRequestsByChannel(String channel) {
+        totalRequestsByChannel.labels(channel).inc();
     }
 
     String sanitize(String host) {

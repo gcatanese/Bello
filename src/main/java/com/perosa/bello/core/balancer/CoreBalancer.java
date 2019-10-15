@@ -48,7 +48,8 @@ public abstract class CoreBalancer implements Balancer {
 
         put(sessionId, new SessionInfo(sessionId, target));
 
-        new Counters().incTotalRequests(target);
+        new Counters().incTotalRequestsByHost(target);
+        new Counters().incTotalRequestsByChannel(request.getChannel());
 
         return target;
     }
