@@ -51,7 +51,7 @@ public class RedisSessionCache implements SessionCache {
             getJedis().hset(sessionId, "date", writeToString(sessionInfo.getDate()));
             getJedis().hset(sessionId, "agent", sessionInfo.getAgent());
 
-            getJedis().expire(sessionId, 600);
+            getJedis().expire(sessionId, 60);
         }
     }
 
