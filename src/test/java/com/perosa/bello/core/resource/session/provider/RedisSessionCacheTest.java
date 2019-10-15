@@ -63,7 +63,7 @@ class RedisSessionCacheTest {
         sessionInfo.setId("s01");
         sessionInfo.setHost("localhost");
         sessionInfo.setDate(LocalDateTime.now());
-        sessionInfo.setAgent("Telegram");
+        sessionInfo.setChannel("Telegram");
 
         redisSessionCache.put("s01", sessionInfo);
 

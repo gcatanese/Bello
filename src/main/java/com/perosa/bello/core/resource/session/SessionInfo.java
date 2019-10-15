@@ -7,7 +7,7 @@ public class SessionInfo {
     private String id;
     private String host;
     private LocalDateTime date = LocalDateTime.now();
-    private String agent;
+    private String channel;
 
     public SessionInfo() {
     }
@@ -15,6 +15,13 @@ public class SessionInfo {
     public SessionInfo(String id, String host) {
         this.id = id;
         this.host = host;
+        this.channel = "n/a";
+    }
+
+    public SessionInfo(String id, String host, String channel) {
+        this.id = id;
+        this.host = host;
+        this.channel = channel;
     }
 
     public String getId() {
@@ -41,19 +48,20 @@ public class SessionInfo {
         this.date = date;
     }
 
-    public String getAgent() {
-        return agent;
+    public String getChannel() {
+        return channel;
     }
 
-    public void setAgent(String agent) {
-        this.agent = agent;
+    public void setChannel(String channel) {
+        this.channel = channel;
     }
 
     @Override
     public String toString() {
         return "SessionInfo{" +
-                "id='" + id + '\'' +
-                ", host=" + host +
+                "id=" + id +
+                ",host=" + host +
+                ",channel=" + channel +
                 '}';
     }
 }

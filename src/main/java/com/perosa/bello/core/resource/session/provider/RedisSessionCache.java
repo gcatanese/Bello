@@ -36,7 +36,7 @@ public class RedisSessionCache implements SessionCache {
             sessionInfo.setId(id);
             sessionInfo.setHost(getJedis().hget(sessionId, "host"));
             sessionInfo.setDate(writeToLocalDateTime(getJedis().hget(sessionId, "date")));
-            sessionInfo.setAgent(getJedis().hget(sessionId, "agent"));
+            sessionInfo.setChannel(getJedis().hget(sessionId, "channel"));
         }
 
         return sessionInfo;
@@ -49,7 +49,7 @@ public class RedisSessionCache implements SessionCache {
             getJedis().hset(sessionId, "id", sessionInfo.getId());
             getJedis().hset(sessionId, "host", sessionInfo.getHost());
             getJedis().hset(sessionId, "date", writeToString(sessionInfo.getDate()));
-            getJedis().hset(sessionId, "agent", sessionInfo.getAgent());
+            getJedis().hset(sessionId, "channel", sessionInfo.getChannel());
 
             getJedis().expire(sessionId, 60);
         }
