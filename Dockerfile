@@ -1,4 +1,4 @@
-FROM openjdk:11-jdk
+FROM adoptopenjdk/openjdk11:latest
 
 RUN mkdir -p /software/belloadc
 
