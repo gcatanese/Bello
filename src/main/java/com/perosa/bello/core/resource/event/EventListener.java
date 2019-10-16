@@ -1,5 +1,6 @@
 package com.perosa.bello.core.resource.event;
 
+import com.perosa.bello.core.resource.event.metrics.PrometheusEventHandler;
 import net.engio.mbassy.listener.Handler;
 import net.engio.mbassy.listener.Invoke;
 import net.engio.mbassy.listener.Listener;
@@ -14,6 +15,8 @@ public class EventListener {
     @Handler(delivery = Invoke.Asynchronously)
     public void handle(Event event){
         LOGGER.debug("handling " + event);
+
+        new PrometheusEventHandler().process(event);
 
     }
 }
