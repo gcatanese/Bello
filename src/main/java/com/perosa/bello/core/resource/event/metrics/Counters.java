@@ -1,4 +1,4 @@
-package com.perosa.bello.core.resource.metrics;
+package com.perosa.bello.core.resource.event.metrics;
 
 import io.prometheus.client.Counter;
 import org.slf4j.Logger;

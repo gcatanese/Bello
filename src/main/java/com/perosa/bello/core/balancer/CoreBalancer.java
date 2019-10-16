@@ -1,7 +1,7 @@
 package com.perosa.bello.core.balancer;
 
 import com.perosa.bello.core.resource.ResourceHost;
-import com.perosa.bello.core.resource.metrics.Counters;
+import com.perosa.bello.core.resource.event.metrics.Counters;
 import com.perosa.bello.core.resource.session.SessionCache;
 import com.perosa.bello.core.channel.Channel;
 import com.perosa.bello.core.resource.host.HostCache;

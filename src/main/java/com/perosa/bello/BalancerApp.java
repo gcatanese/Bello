@@ -4,7 +4,7 @@ import com.perosa.bello.core.balancer.Balancer;
 import com.perosa.bello.core.config.Env;
 import com.perosa.bello.core.resource.healthcheck.HealthCheckClient;
 import com.perosa.bello.core.resource.healthcheck.ResourceHealthCheck;
-import com.perosa.bello.core.resource.metrics.SessionTrackerThread;
+import com.perosa.bello.core.resource.event.metrics.SessionTrackerThread;
 import com.perosa.bello.core.util.TerminationManager;
 import com.perosa.bello.server.DispatchLogic;
 import com.perosa.bello.server.Listener;

@@ -1,4 +1,4 @@
-package com.perosa.bello.core.resource.metrics;
+package com.perosa.bello.core.resource.event.metrics;
 
 import com.perosa.bello.core.resource.session.SessionCache;
 import org.slf4j.Logger;
