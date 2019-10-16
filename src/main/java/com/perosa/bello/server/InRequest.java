@@ -49,4 +49,12 @@ public class InRequest {
     public void setChannel(String channel) {
         this.channel = channel;
     }
+
+    @Override
+    public String toString() {
+        return "InRequest[" +
+                "host:" + host +
+                ",channel:" + channel +
+                "]";
+    }
 }
