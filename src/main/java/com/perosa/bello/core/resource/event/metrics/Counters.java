@@ -1,6 +1,7 @@
 package com.perosa.bello.core.resource.event.metrics;
 
 import io.prometheus.client.Counter;
+import io.prometheus.client.Summary;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,6 +21,12 @@ public class Counters {
             .labelNames("channel")
             .register();
 
+    static final Summary totalPayloadSizeByChannel = Summary.build()
+            .name("belloadc_total_payload_size_by_channel")
+            .help("Total Payload Size by Channel")
+            .labelNames("channel")
+            .register();
+
     public void incTotalRequestsByHost(String host) {
         if(host != null) {
             totalRequestsByHost.labels(sanitize(host)).inc();
@@ -29,6 +36,12 @@ public class Counters {
     public void incTotalRequestsByChannel(String channel) {
         if(channel != null) {
             totalRequestsByChannel.labels(channel).inc();
+        }
+    }
+
+    public void incTotalPayloadSizeByChannel(String channel, String payload) {
+        if(channel != null && payload != null) {
+            totalPayloadSizeByChannel.labels(channel).observe(payload.length());
         }
     }
 

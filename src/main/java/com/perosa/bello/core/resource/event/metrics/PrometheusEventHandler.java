@@ -6,8 +6,11 @@ public class PrometheusEventHandler {
 
     public void process(Event event) {
 
-        new Counters().incTotalRequestsByHost(event.getTarget());
-        new Counters().incTotalRequestsByChannel(event.getRequest().getChannel());
+        Counters counters = new Counters();
+
+        counters.incTotalRequestsByHost(event.getTarget());
+        counters.incTotalRequestsByChannel(event.getRequest().getChannel());
+        counters.incTotalPayloadSizeByChannel(event.getRequest().getChannel(), event.getRequest().getPayload());
 
     }
 }
