@@ -13,10 +13,10 @@ public class EventListener {
     private static final Logger LOGGER = LoggerFactory.getLogger(EventListener.class);
 
     @Handler(delivery = Invoke.Asynchronously)
-    public void handle(Event event){
-        LOGGER.debug("handling " + event);
+    public void handle(Event event) {
 
-        new PrometheusEventHandler().process(event);
-
+        if (event instanceof PostEvent) {
+            new PrometheusEventHandler().process((PostEvent) event);
+        }
     }
 }

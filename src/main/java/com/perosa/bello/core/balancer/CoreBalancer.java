@@ -1,7 +1,7 @@
 package com.perosa.bello.core.balancer;
 
 import com.perosa.bello.core.resource.ResourceHost;
-import com.perosa.bello.core.resource.event.Event;
+import com.perosa.bello.core.resource.event.PostEvent;
 import com.perosa.bello.core.resource.event.EventManager;
 import com.perosa.bello.core.resource.session.SessionCache;
 import com.perosa.bello.core.channel.Channel;
@@ -49,7 +49,7 @@ public abstract class CoreBalancer implements Balancer {
 
         put(sessionId, new SessionInfo(sessionId, target, channel));
 
-        EventManager.sendEvent(new Event(request, target));
+        EventManager.sendEvent(new PostEvent(request, target));
 
         return target;
     }
