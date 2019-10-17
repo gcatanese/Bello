@@ -45,7 +45,6 @@ public abstract class CoreBalancer implements Balancer {
         if(target == null) {
             ResourceHost resourceHost = findNext(getAvailableHosts(HostCache.getResourceHosts()));
             target = resourceHost.getHost();
-
         }
 
         put(sessionId, new SessionInfo(sessionId, target, channel));
