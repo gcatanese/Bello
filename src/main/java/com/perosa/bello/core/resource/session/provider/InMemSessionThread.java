@@ -43,7 +43,7 @@ public class InMemSessionThread {
                 .forEach(e -> expired.add(e.getKey()));
 
         if(!expired.isEmpty()) {
-            LOGGER.info("Discarding " + expired);
+            LOGGER.trace("Discarding " + expired);
             cache.getMap().keySet().removeAll(expired);
         }
     }
