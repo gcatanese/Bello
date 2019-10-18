@@ -33,9 +33,47 @@ public class RedisSessionCache implements SessionCache {
 
     @Override
     public SessionInfo get(String sessionId) {
-        SessionInfo sessionInfo = null;
 
         String key = REDIS_KEY_NAMESPACE + ":" + sessionId;
+
+        return fetchFromRedis(key);
+    }
+
+    @Override
+    public void put(String sessionId, SessionInfo sessionInfo) {
+
+        if (sessionId != null) {
+            String key = REDIS_KEY_NAMESPACE + ":" + sessionId;
+
+            sendToRedis(key, sessionInfo);
+        }
+    }
+
+    @Override
+    public void remove(String key) {
+        deleteFromRedis(key);
+    }
+
+    @Override
+    public int size() {
+        return getMap().size();
+    }
+
+    @Override
+    public Map<String, SessionInfo> getMap() {
+        Map<String, SessionInfo> map = new HashMap<>();
+
+        getKeysFromRedis().stream().forEach(e -> map.put(e, fetchFromRedis(e)));
+
+        LOGGER.debug("Redis map:" + map);
+
+        return map;
+    }
+
+///// Redis interactions
+
+    private SessionInfo fetchFromRedis(String key) {
+        SessionInfo sessionInfo = null;
 
         String id = getJedis().hget(key, "id");
 
@@ -51,49 +89,30 @@ public class RedisSessionCache implements SessionCache {
         return sessionInfo;
     }
 
-    @Override
-    public void put(String sessionId, SessionInfo sessionInfo) {
+    private void sendToRedis(String key, SessionInfo sessionInfo) {
 
-        if (sessionId != null) {
-            String key = REDIS_KEY_NAMESPACE + ":" + sessionId;
+        getJedis().hset(key, "id", sessionInfo.getId());
+        getJedis().hset(key, "host", sessionInfo.getHost());
+        getJedis().hset(key, "date", writeToString(sessionInfo.getDate()));
+        getJedis().hset(key, "channel", sessionInfo.getChannel());
 
-            getJedis().hset(key, "id", sessionInfo.getId());
-            getJedis().hset(key, "host", sessionInfo.getHost());
-            getJedis().hset(key, "date", writeToString(sessionInfo.getDate()));
-            getJedis().hset(key, "channel", sessionInfo.getChannel());
-
-            getJedis().expire(key, 60 * 30);
-        }
+        getJedis().expire(key, 60 * 30);
     }
 
-    @Override
-    public void remove(String sessionId) {
-
-        String key = REDIS_KEY_NAMESPACE + ":" + sessionId;
+    private void deleteFromRedis(String key) {
 
         long ret = getJedis().del(key);
 
         if (ret != 1) {
-            LOGGER.warn("Error while DEL from Redis key:" + sessionId + " ret:" + ret);
+            LOGGER.warn("Error while DEL from Redis key:" + key + " ret:" + ret);
         }
     }
 
-
-    @Override
-    public int size() {
-        return getMap().size();
+    private Set<String> getKeysFromRedis() {
+        return getJedis().keys(REDIS_KEY_NAMESPACE + "*");
     }
 
-    @Override
-    public Map<String, SessionInfo> getMap() {
-        Map<String, SessionInfo> map = new HashMap<>();
-
-        Set<String> set = getJedis().keys(REDIS_KEY_NAMESPACE + "*");
-        set.stream().forEach(e -> map.put(e, get(e)));
-
-        return map;
-    }
-
+///// Helpers
 
     String writeToString(LocalDateTime localDateTime) {
         return (localDateTime != null ? localDateTime.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME) : "");

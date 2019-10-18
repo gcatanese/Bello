@@ -77,7 +77,7 @@ class RedisSessionCacheTest {
     void remove() {
         RedisSessionCache redisSessionCache = new RedisSessionCache(jedis);
 
-        redisSessionCache.remove("01");
+        redisSessionCache.remove("belloadc:01");
 
         verify(jedis, times(1)).del(eq("belloadc:01"));
     }
