@@ -39,12 +39,8 @@ public class SessionTrackerThread {
         Map<String, List<SessionInfo>> sessionPerChannel = map.values().stream()
                 .collect(groupingBy(SessionInfo::getChannel));
 
-        LOGGER.info("sessionPerChannel: " + sessionPerChannel);
-
         Map<String, List<SessionInfo>> sessionPerHost = map.values().stream()
                 .collect(groupingBy(SessionInfo::getHost));
-
-        LOGGER.info("sessionPerHost: " + sessionPerHost);
 
         sessionPerChannel.entrySet().stream()
                 .forEach(e -> gauges.setTotalUserSessionsByChannel(e.getKey(), e.getValue().size()));

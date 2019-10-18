@@ -29,6 +29,8 @@ public class Gauges {
     }
 
     String sanitize(String host) {
+        host = host.substring(0, host.lastIndexOf("."));
+        host = host.substring(0, host.lastIndexOf("."));
         host = host.replace(".", "_");
 
         return host;

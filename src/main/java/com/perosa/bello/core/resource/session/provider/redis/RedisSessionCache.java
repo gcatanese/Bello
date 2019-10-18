@@ -65,7 +65,7 @@ public class RedisSessionCache implements SessionCache {
 
         getKeysFromRedis().stream().forEach(e -> map.put(e, fetchFromRedis(e)));
 
-        LOGGER.debug("Redis map:" + map);
+        LOGGER.trace("Redis-->" + map);
 
         return map;
     }
