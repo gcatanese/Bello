@@ -27,11 +27,19 @@ public class InMemSessionCache implements SessionCache {
     }
 
     @Override
+    public void remove(String sessionId) {
+        if(sessionId != null) {
+            map.remove(sessionId);
+        }
+    }
+
+    @Override
     public int size() {
         return map.size();
     }
 
-    Map<String, SessionInfo> getMap() {
+    @Override
+    public Map<String, SessionInfo> getMap() {
         return map;
     }
 }

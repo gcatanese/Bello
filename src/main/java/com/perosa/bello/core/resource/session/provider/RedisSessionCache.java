@@ -9,6 +9,9 @@ import redis.clients.jedis.Jedis;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 
 public class RedisSessionCache implements SessionCache {
@@ -51,14 +54,38 @@ public class RedisSessionCache implements SessionCache {
             getJedis().hset(sessionId, "date", writeToString(sessionInfo.getDate()));
             getJedis().hset(sessionId, "channel", sessionInfo.getChannel());
 
-            getJedis().expire(sessionId, 60);
+            getJedis().expire(sessionId, 60 * 30);
         }
     }
+
+    @Override
+    public void remove(String sessionId) {
+        SessionInfo sessionInfo = null;
+
+        long ret = getJedis().del(sessionId);
+
+        if(ret != 1) {
+            LOGGER.warn("Error while DEL from Redis keyy:" + sessionId + " ret:" + ret);
+        }
+    }
+
 
     @Override
     public int size() {
         return getJedis().keys("*").size();
     }
+
+    @Override
+    public Map<String, SessionInfo> getMap() {
+        Map<String, SessionInfo> map = new HashMap<>();
+
+        Set<String> set = getJedis().keys("*");
+
+        set.stream().forEach(e -> map.put(e, get(e)));
+
+        return map;
+    }
+
 
     String writeToString(LocalDateTime localDateTime) {
         return (localDateTime != null ? localDateTime.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME) : "");

@@ -44,4 +44,21 @@ class InMemSessionCacheTest {
         assertTrue(InMemSessionCache.map.isEmpty());
     }
 
+    @Test
+    void remove() {
+        InMemSessionCache.map.put("01", new SessionInfo("01" ,"localhost"));
+
+        sessionCache.remove("01");
+
+        assertNull(sessionCache.get("01"));
+    }
+
+    @Test
+    void getMap() {
+        InMemSessionCache.map.put("01", new SessionInfo("01" ,"localhost"));
+
+        assertNotNull(sessionCache.getMap());
+        assertEquals(1, sessionCache.getMap().size());
+    }
+
 }

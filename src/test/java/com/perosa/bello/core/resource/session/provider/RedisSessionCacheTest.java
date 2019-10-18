@@ -10,6 +10,8 @@ import org.slf4j.LoggerFactory;
 import redis.clients.jedis.Jedis;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.HashSet;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
@@ -72,6 +74,24 @@ class RedisSessionCacheTest {
     }
 
     @Test
+    void remove() {
+        RedisSessionCache redisSessionCache = new RedisSessionCache(jedis);
+
+        redisSessionCache.remove("01");
+
+        verify(jedis, times(1)).del(eq("01"));
+    }
+
+    @Test
+    void removeNullKey() {
+        RedisSessionCache redisSessionCache = new RedisSessionCache(jedis);
+
+        redisSessionCache.remove(null);
+
+        verify(jedis, times(0)).del(isA(String.class));
+    }
+
+    @Test
     void size() {
 
         RedisSessionCache redisSessionCache = new RedisSessionCache(jedis);
@@ -126,4 +146,14 @@ class RedisSessionCacheTest {
         assertNull(localDateTime);
 
     }
+
+    @Test
+    void getMap() {
+        RedisSessionCache redisSessionCache = new RedisSessionCache(jedis);
+        when(jedis.keys(isA(String.class))).thenReturn(new HashSet<>(Arrays.asList("s1", "s2")));
+
+        assertNotNull(redisSessionCache.getMap());
+        assertEquals(2, redisSessionCache.getMap().size());
+    }
+
 }
