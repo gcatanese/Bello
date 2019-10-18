@@ -29,8 +29,8 @@ class RedisSessionCacheTest {
     void get() {
 
         RedisSessionCache redisSessionCache = new RedisSessionCache(jedis);
-        when(jedis.hget(eq("s01"), eq("id"))).thenReturn("01");
-        when(jedis.hget(eq("s01"), eq("host"))).thenReturn("localhost");
+        when(jedis.hget(eq("belloadc:s01"), eq("id"))).thenReturn("01");
+        when(jedis.hget(eq("belloadc:s01"), eq("host"))).thenReturn("localhost");
 
         SessionInfo sessionInfo = redisSessionCache.get("s01");
 
@@ -46,7 +46,7 @@ class RedisSessionCacheTest {
     void getNotFound() {
 
         RedisSessionCache redisSessionCache = new RedisSessionCache(jedis);
-        when(jedis.hget(eq("s02"), eq("id"))).thenReturn(null);
+        when(jedis.hget(eq("belloadc:s02"), eq("id"))).thenReturn(null);
 
         SessionInfo sessionInfo = redisSessionCache.get("s02");
 
@@ -79,16 +79,7 @@ class RedisSessionCacheTest {
 
         redisSessionCache.remove("01");
 
-        verify(jedis, times(1)).del(eq("01"));
-    }
-
-    @Test
-    void removeNullKey() {
-        RedisSessionCache redisSessionCache = new RedisSessionCache(jedis);
-
-        redisSessionCache.remove(null);
-
-        verify(jedis, times(0)).del(isA(String.class));
+        verify(jedis, times(1)).del(eq("belloadc:01"));
     }
 
     @Test

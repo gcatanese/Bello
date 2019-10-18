@@ -18,6 +18,8 @@ public class RedisSessionCache implements SessionCache {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RedisSessionCache.class);
 
+    private static final String REDIS_KEY_NAMESPACE = "belloadc";
+
     private Env env;
 
     private Jedis jedis;
@@ -33,15 +35,17 @@ public class RedisSessionCache implements SessionCache {
     public SessionInfo get(String sessionId) {
         SessionInfo sessionInfo = null;
 
-        String id = getJedis().hget(sessionId, "id");
+        String key = REDIS_KEY_NAMESPACE + ":" + sessionId;
 
-        if(id != null) {
+        String id = getJedis().hget(key, "id");
+
+        if (id != null) {
             sessionInfo = new SessionInfo();
 
             sessionInfo.setId(id);
-            sessionInfo.setHost(getJedis().hget(sessionId, "host"));
-            sessionInfo.setDate(writeToLocalDateTime(getJedis().hget(sessionId, "date")));
-            sessionInfo.setChannel(getJedis().hget(sessionId, "channel"));
+            sessionInfo.setHost(getJedis().hget(key, "host"));
+            sessionInfo.setDate(writeToLocalDateTime(getJedis().hget(key, "date")));
+            sessionInfo.setChannel(getJedis().hget(key, "channel"));
         }
 
         return sessionInfo;
@@ -51,23 +55,26 @@ public class RedisSessionCache implements SessionCache {
     public void put(String sessionId, SessionInfo sessionInfo) {
 
         if (sessionId != null) {
-            getJedis().hset(sessionId, "id", sessionInfo.getId());
-            getJedis().hset(sessionId, "host", sessionInfo.getHost());
-            getJedis().hset(sessionId, "date", writeToString(sessionInfo.getDate()));
-            getJedis().hset(sessionId, "channel", sessionInfo.getChannel());
+            String key = REDIS_KEY_NAMESPACE + ":" + sessionId;
 
-            getJedis().expire(sessionId, 60 * 30);
+            getJedis().hset(key, "id", sessionInfo.getId());
+            getJedis().hset(key, "host", sessionInfo.getHost());
+            getJedis().hset(key, "date", writeToString(sessionInfo.getDate()));
+            getJedis().hset(key, "channel", sessionInfo.getChannel());
+
+            getJedis().expire(key, 60 * 30);
         }
     }
 
     @Override
     public void remove(String sessionId) {
-        SessionInfo sessionInfo = null;
 
-        long ret = getJedis().del(sessionId);
+        String key = REDIS_KEY_NAMESPACE + ":" + sessionId;
 
-        if(ret != 1) {
-            LOGGER.warn("Error while DEL from Redis keyy:" + sessionId + " ret:" + ret);
+        long ret = getJedis().del(key);
+
+        if (ret != 1) {
+            LOGGER.warn("Error while DEL from Redis key:" + sessionId + " ret:" + ret);
         }
     }
 
@@ -81,8 +88,7 @@ public class RedisSessionCache implements SessionCache {
     public Map<String, SessionInfo> getMap() {
         Map<String, SessionInfo> map = new HashMap<>();
 
-        Set<String> set = getJedis().keys("*");
-
+        Set<String> set = getJedis().keys(REDIS_KEY_NAMESPACE + "*");
         set.stream().forEach(e -> map.put(e, get(e)));
 
         return map;
