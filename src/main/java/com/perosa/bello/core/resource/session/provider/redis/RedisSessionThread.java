@@ -20,7 +20,7 @@ public class RedisSessionThread {
 
     public void start() {
 
-        Timer timer = new Timer("redisessionThread");
+        Timer timer = new Timer("rediSessionThread");
         final long INTERVAL = 1000L * 60 * 5;
 
         TimerTask task = new TimerTask() {
