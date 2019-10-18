@@ -8,14 +8,30 @@ public class Gauges {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Gauges.class);
 
-    static final Gauge totalUserSessions = Gauge.build()
-            .name("belloadc_total_user_sessions")
-            .help("Number of User Sessions in cache")
+    static final Gauge totalUserSessionsByHost = Gauge.build()
+            .name("belloadc_total_user_sessions_by_host")
+            .help("Number of User Sessions by Host")
+            .labelNames("host")
             .register();
 
+    static final Gauge totalUserSessionsByChannel = Gauge.build()
+            .name("belloadc_total_user_sessions_by_channel")
+            .help("Number of User Sessions by Channel")
+            .labelNames("channel")
+            .register();
 
-    void setTotalUserSessions(int val) {
-        totalUserSessions.set(val);
+    void setTotalUserSessionsByHost(String host, int val) {
+        totalUserSessionsByHost.labels(sanitize(host)).set(val);
+    }
+
+    void setTotalUserSessionsByChannel(String channel, int val) {
+        totalUserSessionsByChannel.labels(channel).set(val);
+    }
+
+    String sanitize(String host) {
+        host = host.replace(".", "_");
+
+        return host;
     }
 
 }

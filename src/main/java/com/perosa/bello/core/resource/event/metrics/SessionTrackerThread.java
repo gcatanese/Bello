@@ -1,11 +1,16 @@
 package com.perosa.bello.core.resource.event.metrics;
 
 import com.perosa.bello.core.resource.session.SessionCache;
+import com.perosa.bello.core.resource.session.SessionInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.List;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import static java.util.stream.Collectors.groupingBy;
 
 public class SessionTrackerThread {
 
@@ -20,7 +25,7 @@ public class SessionTrackerThread {
 
         TimerTask task = new TimerTask() {
             public void run() {
-                setValue();
+                setValues();
             }
         };
 
@@ -28,8 +33,26 @@ public class SessionTrackerThread {
 
     }
 
-    private void setValue() {
-        gauges.setTotalUserSessions(SessionCache.make().size());
+    private void setValues() {
+        Map<String, SessionInfo> map = SessionCache.make().getMap();
+
+        Map<String, List<SessionInfo>> sessionPerChannel = map.values().stream()
+                .collect(groupingBy(SessionInfo::getChannel));
+
+        LOGGER.info("sessionPerChannel: " + sessionPerChannel);
+
+        Map<String, List<SessionInfo>> sessionPerHost = map.values().stream()
+                .collect(groupingBy(SessionInfo::getHost));
+
+        LOGGER.info("sessionPerHost: " + sessionPerHost);
+
+        sessionPerChannel.entrySet().stream()
+                .forEach(e -> gauges.setTotalUserSessionsByChannel(e.getKey(), e.getValue().size()));
+
+        sessionPerHost.entrySet().stream()
+                .forEach(e -> gauges.setTotalUserSessionsByHost(e.getKey(), e.getValue().size()));
+
     }
+
 
 }
