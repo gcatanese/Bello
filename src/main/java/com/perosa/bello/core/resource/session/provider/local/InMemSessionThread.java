@@ -1,4 +1,4 @@
-package com.perosa.bello.core.resource.session.provider;
+package com.perosa.bello.core.resource.session.provider.local;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

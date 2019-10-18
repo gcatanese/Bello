@@ -1,4 +1,4 @@
-package com.perosa.bello.core.resource.session.provider;
+package com.perosa.bello.core.resource.session.provider.redis;
 
 import com.perosa.bello.core.config.Env;
 import com.perosa.bello.core.resource.session.SessionCache;

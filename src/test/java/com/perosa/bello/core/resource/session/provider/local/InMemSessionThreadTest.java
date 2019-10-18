@@ -1,6 +1,8 @@
-package com.perosa.bello.core.resource.session.provider;
+package com.perosa.bello.core.resource.session.provider.local;
 
 import com.perosa.bello.core.resource.session.SessionInfo;
+import com.perosa.bello.core.resource.session.provider.local.InMemSessionCache;
+import com.perosa.bello.core.resource.session.provider.local.InMemSessionThread;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;

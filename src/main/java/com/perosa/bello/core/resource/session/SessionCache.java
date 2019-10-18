@@ -1,8 +1,8 @@
 package com.perosa.bello.core.resource.session;
 
 import com.perosa.bello.core.config.Env;
-import com.perosa.bello.core.resource.session.provider.InMemSessionCache;
-import com.perosa.bello.core.resource.session.provider.RedisSessionCache;
+import com.perosa.bello.core.resource.session.provider.local.InMemSessionCache;
+import com.perosa.bello.core.resource.session.provider.redis.RedisSessionCache;
 import redis.clients.jedis.Jedis;
 
 import java.util.Map;

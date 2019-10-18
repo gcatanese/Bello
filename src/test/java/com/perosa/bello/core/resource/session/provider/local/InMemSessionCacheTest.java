@@ -1,6 +1,7 @@
-package com.perosa.bello.core.resource.session.provider;
+package com.perosa.bello.core.resource.session.provider.local;
 
 import com.perosa.bello.core.resource.session.SessionInfo;
+import com.perosa.bello.core.resource.session.provider.local.InMemSessionCache;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
