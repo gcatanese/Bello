@@ -25,6 +25,8 @@ public class RedisSessionCache implements SessionCache {
     public RedisSessionCache(Jedis jedis) {
         this.env = new Env();
         this.jedis = jedis;
+
+        new RedisSessionThread(this).start();
     }
 
     @Override
@@ -72,7 +74,7 @@ public class RedisSessionCache implements SessionCache {
 
     @Override
     public int size() {
-        return getJedis().keys("*").size();
+        return getMap().size();
     }
 
     @Override
