@@ -5,11 +5,17 @@ import com.perosa.bello.core.resource.session.provider.InMemSessionCache;
 import com.perosa.bello.core.resource.session.provider.RedisSessionCache;
 import redis.clients.jedis.Jedis;
 
+import java.util.Map;
+
 public interface SessionCache {
 
     SessionInfo get(String sessionId);
 
     void put(String sessionId, SessionInfo sessionInfo);
+
+    void remove(String sessionId);
+
+    Map<String, SessionInfo> getMap();
 
     int size();
 
