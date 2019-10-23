@@ -33,8 +33,14 @@ public class Counters {
     }
 
     String sanitize(String host) {
-        host = host.substring(0, host.lastIndexOf("."));
-        host = host.substring(0, host.lastIndexOf("."));
+        if(host.lastIndexOf(".") > -1) {
+            host = host.substring(0, host.lastIndexOf("."));
+        }
+
+        if(host.lastIndexOf(".") > -1) {
+            host = host.substring(0, host.lastIndexOf("."));
+        }
+
         host = host.replace(".", "_");
 
         return host;
