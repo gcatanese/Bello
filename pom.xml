@@ -118,9 +118,9 @@
                 <version>2.22.2</version>
                 <configuration>
                     <trimStackTrace>false</trimStackTrace>
-                    <systemPropertyVariables>
+                    <environmentVariables>
                         <config>src/test/resources/</config>
-                    </systemPropertyVariables>
+                    </environmentVariables>
                 </configuration>
             </plugin>
 
