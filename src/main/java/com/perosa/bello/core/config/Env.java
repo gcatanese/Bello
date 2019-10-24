@@ -8,7 +8,7 @@ public class Env {
     private static final Logger LOGGER = LoggerFactory.getLogger(Env.class);
 
     public String getConfig() {
-        String config = System.getProperty("config");
+        String config = System.getenv("config");
 
         if (config == null || config.isEmpty()) {
             config = "config/";
@@ -22,7 +22,7 @@ public class Env {
     }
 
     public int getPort() {
-        String port = System.getProperty("port");
+        String port = System.getenv("port");
 
         if (port == null || port.isEmpty()) {
             port = System.getenv("PORT");
@@ -37,7 +37,7 @@ public class Env {
     }
 
     public int getHealthCheckInterval() {
-        String interval = System.getProperty("healthCheckInterval");
+        String interval = System.getenv("healthCheckInterval");
 
         if (interval == null || interval.isEmpty()) {
             interval = "20";
@@ -48,7 +48,7 @@ public class Env {
     }
 
     public String getStrategy() {
-        String strategy = System.getProperty("strategy");
+        String strategy = System.getenv("strategy");
 
         if (strategy == null || strategy.isEmpty()) {
             strategy = "roundrobin";
@@ -58,7 +58,7 @@ public class Env {
     }
 
     public String getCacheImpl() {
-        String cache = System.getProperty("cacheImpl");
+        String cache = System.getenv("cacheImpl");
 
         if (cache == null || cache.isEmpty()) {
             cache = "inMemory";
@@ -68,7 +68,7 @@ public class Env {
     }
 
     public String getRedisHost() {
-        String host = System.getProperty("redisHost");
+        String host = System.getenv("redisHost");
 
         if (host == null || host.isEmpty()) {
             host = "localhost";
@@ -78,7 +78,7 @@ public class Env {
     }
 
     public int getRedisPort() {
-        String port = System.getProperty("redisPort");
+        String port = System.getenv("redisPort");
 
         if (port == null || port.isEmpty()) {
             port = "6379";
@@ -88,7 +88,7 @@ public class Env {
     }
 
     public int getMetricsHandlerPort() {
-        String port = System.getProperty("metricsHandlerPort");
+        String port = System.getenv("metricsHandlerPort");
 
         if (port == null || port.isEmpty()) {
             port = "8889";
