@@ -19,11 +19,12 @@ Bello is a lightweight ADC which distributes incoming Webhook traffic to the ava
 
 ## Deploy 
 
-Run DockerImage providing the volume where to find the config folder.
+Run DockerImage providing the volume where to find the config folder (and optionally override default properties).
 ```
 docker login
 docker pull perosa/belloadc
-docker run -p 8080:8886 -v /config:/software/config -e "strategy=weightedroundrobin" -e "PORT=9876 perosa/belloadc
+docker run -p 8080:8886 -v /config:/software/config -e "strategy=weightedroundrobin" 
+ -e "PORT=9876 perosa/belloadc
 ```
 
 Run from Java
