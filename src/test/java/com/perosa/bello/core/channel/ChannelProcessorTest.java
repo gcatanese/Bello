@@ -90,4 +90,18 @@ class ChannelProcessorTest {
         assertTrue(new ChannelProcessor().getChannel(request) instanceof TelegramChannel);
     }
 
+    @Test
+    void getSlackChannel() {
+
+        Map<String, String> headers = new HashMap<>();
+        headers.put("user-agent", "Slackbot");
+
+        InRequest request = new InRequest();
+        request.setHost("localhost");
+        request.setHeaders(headers);
+
+        assertTrue(new ChannelProcessor().getChannel(request) instanceof SlackChannel);
+    }
+
+
 }

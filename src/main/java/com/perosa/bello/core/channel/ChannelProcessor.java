@@ -27,6 +27,8 @@ public class ChannelProcessor implements Channel {
             return new FacebookChannel();
         } else if (isTelegram(request)) {
             return new TelegramChannel();
+        } else if (isSlack(request)) {
+            return new SlackChannel();
         } else {
             return new UnknownChannel();
         }
@@ -53,6 +55,11 @@ public class ChannelProcessor implements Channel {
     boolean isTelegram(InRequest request) {
         String header = request.getHeaders().get("user-agent");
         return header != null && header.toLowerCase().contains("telegram");
+    }
+
+    boolean isSlack(InRequest request) {
+        String header = request.getHeaders().get("user-agent");
+        return header != null && header.toLowerCase().contains("slackbot");
     }
 
 }
