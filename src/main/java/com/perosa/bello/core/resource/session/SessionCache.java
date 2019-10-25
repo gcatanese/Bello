@@ -9,6 +9,8 @@ import java.util.Map;
 
 public interface SessionCache {
 
+    long MAX_DURATION_IN_MIN = 2;
+
     SessionInfo get(String sessionId);
 
     void put(String sessionId, SessionInfo sessionInfo);

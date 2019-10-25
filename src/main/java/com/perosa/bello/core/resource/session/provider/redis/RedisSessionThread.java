@@ -1,5 +1,6 @@
 package com.perosa.bello.core.resource.session.provider.redis;
 
+import com.perosa.bello.core.resource.session.SessionCache;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,7 +12,7 @@ public class RedisSessionThread {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RedisSessionThread.class);
 
-    private static final long MAX_DURATION = 15;
+
     private RedisSessionCache cache;
 
     public RedisSessionThread(RedisSessionCache cache) {
@@ -35,7 +36,7 @@ public class RedisSessionThread {
 
     void cleanUp() {
         cache.getMap().entrySet().stream()
-                .filter(e -> e.getValue().getDate().isBefore(LocalDateTime.now().minusMinutes(MAX_DURATION)))
+                .filter(e -> e.getValue().getDate().isBefore(LocalDateTime.now().minusMinutes(SessionCache.MAX_DURATION_IN_MIN)))
                 .forEach(e -> cache.remove(e.getKey()));
     }
 }

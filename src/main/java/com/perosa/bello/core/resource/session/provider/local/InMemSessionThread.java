@@ -1,5 +1,6 @@
 package com.perosa.bello.core.resource.session.provider.local;
 
+import com.perosa.bello.core.resource.session.SessionCache;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,7 +14,6 @@ public class InMemSessionThread {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(InMemSessionThread.class);
 
-    private static final long MAX_DURATION = 15;
     private InMemSessionCache cache;
 
     public InMemSessionThread(InMemSessionCache cache) {
@@ -39,7 +39,7 @@ public class InMemSessionThread {
         List<String> expired = new ArrayList<>();
 
         cache.getMap().entrySet().stream()
-                .filter(e -> e.getValue().getDate().isBefore(LocalDateTime.now().minusMinutes(MAX_DURATION)))
+                .filter(e -> e.getValue().getDate().isBefore(LocalDateTime.now().minusMinutes(SessionCache.MAX_DURATION_IN_MIN)))
                 .forEach(e -> expired.add(e.getKey()));
 
         if(!expired.isEmpty()) {
