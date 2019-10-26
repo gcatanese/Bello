@@ -23,7 +23,7 @@ public class InMemSessionThread {
     public void start() {
 
         Timer timer = new Timer("inMemSessionThread");
-        final long INTERVAL = 1000L * 60 * 5;
+        final long INTERVAL = 1000L * 60 * SessionCache.INTERVAL_CHECK_IN_MIN;
 
         TimerTask task = new TimerTask() {
             public void run() {

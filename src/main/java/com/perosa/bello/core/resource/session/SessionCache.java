@@ -10,6 +10,7 @@ import java.util.Map;
 public interface SessionCache {
 
     long MAX_DURATION_IN_MIN = 2;
+    long INTERVAL_CHECK_IN_MIN = 1;
 
     SessionInfo get(String sessionId);
 
