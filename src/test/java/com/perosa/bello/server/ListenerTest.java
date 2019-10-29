@@ -1,13 +1,9 @@
 package com.perosa.bello.server;
 
 import com.networknt.client.rest.LightRestClient;
-import com.perosa.bello.core.balancer.Balancer;
 import io.undertow.client.ClientResponse;
-import io.undertow.server.HttpServerExchange;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -17,9 +13,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.isA;
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(MockitoExtension.class)
 class ListenerTest {

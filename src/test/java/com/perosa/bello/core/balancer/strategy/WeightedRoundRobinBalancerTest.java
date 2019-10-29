@@ -64,7 +64,7 @@ class LocalWeightedRoundRobinBalancer extends WeightedRoundRobinBalancer {
     }
 
     @Override
-    int getRandonEntry() {
+    int getRandomEntry() {
         return 45;
     }
 }

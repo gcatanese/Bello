@@ -24,14 +24,14 @@ public class WeightedRoundRobinBalancer extends CoreBalancer implements Balancer
         ResourceHost resourceHost = null;
 
         resourceHost = getBucket(hosts).stream()
-                .skip(getRandonEntry())
+                .skip(getRandomEntry())
                 .findFirst()
                 .get();
 
         return resourceHost;
     }
 
-    int getRandonEntry() {
+    int getRandomEntry() {
         return new Random().nextInt(101);
 
     }
