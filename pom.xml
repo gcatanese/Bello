@@ -58,8 +58,7 @@
             <type>jar</type>
         </dependency>
 
-
-        <!-- The client -->
+        <!-- prometheus -->
         <dependency>
             <groupId>io.prometheus</groupId>
             <artifactId>simpleclient</artifactId>
