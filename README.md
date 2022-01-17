@@ -38,9 +38,8 @@ curl http://localhost:8888/belloadc/test
 
 ## Config and usage
 
-* Customize config/hosts.json to define pool of hosts
-
- Direct Webhooks request to https://{server}:8888, or better configure the ADC behind a production-ready HTTP Server (NGINX, Apache HTTP Server).
+* Customize config/hosts.json to define pool of hosts (services)
+* Direct Webhook requests to Bello (https://{server}:8888 or behing a generic HTTP proxy)
 
 
 ## Features... to date
