@@ -1,6 +1,7 @@
 package com.perosa.bello.core.channel;
 
 import com.perosa.bello.core.channel.platform.*;
+import com.perosa.bello.core.util.JsonUtil;
 import com.perosa.bello.server.InRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,6 +30,8 @@ public class ChannelProcessor implements Channel {
             return new TelegramChannel();
         } else if (isSlack(request)) {
             return new SlackChannel();
+        } else if (isGeneric(request)) {
+            return new GenericChannel();
         } else {
             return new UnknownChannel();
         }
@@ -60,6 +63,11 @@ public class ChannelProcessor implements Channel {
     boolean isSlack(InRequest request) {
         String header = request.getHeaders().get("user-agent");
         return header != null && header.toLowerCase().contains("slackbot");
+    }
+
+    boolean isGeneric(InRequest request) {
+        String payload = request.getPayload();
+        return payload != null && JsonUtil.isJson(payload);
     }
 
 }
