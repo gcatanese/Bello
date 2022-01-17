@@ -27,7 +27,6 @@ class RedisSessionCacheTest {
 
     @Test
     void get() {
-
         RedisSessionCache redisSessionCache = new RedisSessionCache(jedis);
         when(jedis.hget(eq("belloadc:s01"), eq("id"))).thenReturn("01");
         when(jedis.hget(eq("belloadc:s01"), eq("host"))).thenReturn("localhost");
@@ -39,12 +38,10 @@ class RedisSessionCacheTest {
         assertEquals("localhost", sessionInfo.getHost());
 
         verify(jedis, times(4)).hget(isA(String.class), isA(String.class));
-
     }
 
     @Test
     void getNotFound() {
-
         RedisSessionCache redisSessionCache = new RedisSessionCache(jedis);
         when(jedis.hget(eq("belloadc:s02"), eq("id"))).thenReturn(null);
 
@@ -53,12 +50,10 @@ class RedisSessionCacheTest {
         assertNull(sessionInfo);
 
         verify(jedis, times(1)).hget(isA(String.class), isA(String.class));
-
     }
 
     @Test
     void put() {
-
         RedisSessionCache redisSessionCache = new RedisSessionCache(jedis);
 
         SessionInfo sessionInfo = new SessionInfo();
@@ -84,7 +79,6 @@ class RedisSessionCacheTest {
 
     @Test
     void size() {
-
         RedisSessionCache redisSessionCache = new RedisSessionCache(jedis);
 
         int i = redisSessionCache.size();
@@ -100,7 +94,6 @@ class RedisSessionCacheTest {
                 LocalDateTime.of(2018, 7, 7, 12, 34, 57);
 
         assertEquals("2018-07-07T12:34:57", redisSessionCache.writeToString(localDateTime));
-
     }
 
     @Test
@@ -109,7 +102,6 @@ class RedisSessionCacheTest {
 
         LocalDateTime localDateTime = null;
         assertEquals("", redisSessionCache.writeToString(localDateTime));
-
     }
 
     @Test
@@ -126,7 +118,6 @@ class RedisSessionCacheTest {
         assertEquals(12, localDateTime.getHour());
         assertEquals(34, localDateTime.getMinute());
         assertEquals(57, localDateTime.getSecond());
-
     }
 
     @Test
@@ -135,7 +126,6 @@ class RedisSessionCacheTest {
 
         LocalDateTime localDateTime = redisSessionCache.writeToLocalDateTime(null);
         assertNull(localDateTime);
-
     }
 
     @Test
