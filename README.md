@@ -50,12 +50,6 @@ curl http://localhost:8888/belloadc/test
 * Support for: DialogFlow, Chatfuel, Facebook, Microsoft Bot Framework, Telegram, Slack
 * In-memory cache and Redis support
 
-## In the pipeline
 
-* "Least Load" distribution 
-* "Least Requests" distribution
-* Prometheus events
-* Multi-path support
-* REST API
 
 
