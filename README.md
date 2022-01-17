@@ -21,15 +21,14 @@ Bello is a lightweight ADC which distributes incoming Webhook traffic to the ava
 
 Run DockerImage providing the volume where to find the config folder (and optionally override default properties).
 ```
-docker login
-docker pull perosa/belloadc
+docker build -t belloadc .
 docker run -p 8080:8886 -v /config:/software/config -e "strategy=weightedroundrobin" 
- -e "PORT=9876 perosa/belloadc
+ -e "PORT=9876 belloadc
 ```
 
 Run from Java
 ```
-java -jar target/belloadc.jar -Dport=8888 -Dconfig=perosa/config
+java -jar target/belloadc.jar -Dport=8888 -Dconfig=/config
 ```
 
 Ping it 
@@ -59,10 +58,4 @@ curl http://localhost:8888/belloadc/test
 * Multi-path support
 * REST API
 
-
-&nbsp;&nbsp;&nbsp;
-<hr>
-<p align="center">
-Powered by NU IT http://www.nu-it.eu
-</p>
 
