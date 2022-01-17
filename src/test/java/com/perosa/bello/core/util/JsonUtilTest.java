@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class JsonUtilTest {
 
@@ -41,6 +41,22 @@ class JsonUtilTest {
                 "}";
 
         assertEquals("2398612963492357", JsonUtil.findElement("/entry/0/messaging/0/sender/id", json));
+    }
+
+    @Test
+    void isJson() {
+        String json = "{" +
+                    "\"id\":\"A\"" +
+                "}";
+
+        assertTrue(JsonUtil.isJson(json));
+    }
+
+    @Test
+    void isNotJson() {
+        String json = "AAA";
+
+        assertFalse(JsonUtil.isJson(json));
     }
 
 }
