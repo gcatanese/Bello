@@ -70,7 +70,7 @@ class RedisSessionCacheTest {
         redisSessionCache.put("s01", sessionInfo);
 
         verify(jedis, times(4)).hset(isA(String.class), isA(String.class), isA(String.class));
-        verify(jedis, times(1)).expire(isA(String.class), isA(Integer.class));
+        verify(jedis, times(1)).expire(isA(String.class), isA(Long.class));
     }
 
     @Test
