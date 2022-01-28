@@ -39,7 +39,7 @@ curl http://localhost:8888/belloadc/test
 ## Config and usage
 
 * Customize config/hosts.json to define pool of hosts (services)
-* Direct Webhook requests to Bello (https://{server}:8888 or behing a generic HTTP proxy)
+* Send requests to Bello (https://{server}:8888 or behind a generic HTTP proxy)
 
 
 ## Features... to date
